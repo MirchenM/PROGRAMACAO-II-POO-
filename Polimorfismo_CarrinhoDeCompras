@@ -1,0 +1,68 @@
+package Polimorfismo_CarrinhoDeCompras;
+
+class Produto {
+	private String nomeLoja;
+    private double preco;
+    private String descricao;
+
+    public Produto(String nomeLoja, double preco) {
+        this.nomeLoja = nomeLoja;
+        this.preco = preco;
+        this.descricao = "Produto de Informatica";
+    }
+
+    public String getNomeLoja() {
+        return nomeLoja;
+    }
+
+    public void setNomeLoja(String nomeLoja) {
+        this.nomeLoja = nomeLoja;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+}
+
+
+class Mouse extends Produto {
+	private String tipo;
+
+    public Mouse(String nomeloja, double preco, String tipo) {
+        super(nomeloja, preco);
+        this.tipo = tipo;
+    }
+
+    public String getDescricao() {
+        return super.getDescricao() + " " + tipo;
+    }
+}
+
+
+
+class Main {
+    public static void main(String[] args) {
+        Produto[] carrinho = new Produto[5];
+
+        carrinho[0] = new Mouse("Mouse wireless", "Loja A", 50.00);
+        carrinho[1] = new Mouse("Mouse com fio", "Loja B", 30.00, "Óptico");
+        carrinho[2] = new Mouse("Mouse gamer", "Loja C", 120.00, "Laser");
+        carrinho[3] = new Livro("Java para iniciantes", "Autor A", "Loja D", 80.00);
+        carrinho[4] = new Livro("O Guia do Mochileiro das Galáxias", "Autor B", "Loja E", 40.00);
+
+        for (Produto p : carrinho) {
+            System.out.println(p.getDescricao());
+        }
+    }
+}
+
+
