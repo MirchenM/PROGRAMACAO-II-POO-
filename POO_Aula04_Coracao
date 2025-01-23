@@ -1,0 +1,47 @@
+package POO_Aula04_Coracao;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Path2D;
+
+class Coracao extends JPanel {
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        int largura = getWidth();
+        int altura = getHeight();
+        
+        Path2D.Double coracao = new Path2D.Double();
+        coracao.moveTo(largura / 2, altura / 5);
+        coracao.curveTo(largura / 4, 0, 0, altura / 3, largura / 2, altura);
+        coracao.curveTo(largura, altura / 3, largura * 3 / 4, 0, largura / 2, altura / 5);
+        
+        g2d.setColor(Color.RED);
+        g2d.fill(coracao);
+        
+        g2d.setColor(Color.WHITE);
+        Ellipse2D.Double elipse1 = new Ellipse2D.Double(largura * 5 / 16, altura / 5, largura / 4, altura / 4);
+        Ellipse2D.Double elipse2 = new Ellipse2D.Double(largura * 7 / 16, altura / 5, largura / 4, altura / 4);
+        g2d.fill(elipse1);
+        g2d.fill(elipse2);
+    }
+    
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Coracao");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new Coracao());
+        frame.setSize(300, 300);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}
