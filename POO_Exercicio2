@@ -1,0 +1,36 @@
+package POO_Exercicio2;
+
+public class Animal {
+	public void emitirSom() {
+        System.out.println("O animal emite um som generico.");
+    }
+
+}
+
+
+class Bola {
+	public void emitirSom() {
+        System.out.println("A bola nao emite som.");
+    }
+}
+
+
+class Cao extends Animal {
+	 public void emitirSom() {
+	        System.out.println("O cao late: Au Au!");
+	}
+}
+
+
+class Programa {
+	public static void main(String[] args) {
+		Animal animal = new Animal();
+	    Cao cao = new Cao();
+	    Bola bola = new Bola();
+
+	    animal.emitirSom();  // O animal emite um som generico.
+	    cao.emitirSom();     // O cao late: Au Au!
+	    bola.emitirSom();    // A bola nao emite som.
+	}
+}
+
