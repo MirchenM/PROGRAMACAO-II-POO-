@@ -1,0 +1,78 @@
+package Ficha1Exercicio3;
+
+import java.util.Scanner;
+
+//Declaracao de uma classe publica Empresa
+class Empresa {
+	
+	//Declaracao de atributos 
+    private int id;
+    private String nome;
+    private String endereco;
+
+    //Metodo construtor da classe Empresa com os parametros id, nome e endereco 
+    public Empresa(int id, String nome, String endereco) {
+        this.id = id; //Atribuindo o valor do parametro id ao atributo id
+        this.nome = nome; //Atribuindo o valor do parametro nome ao atributo nome 
+        this.endereco = endereco; //Atribuindo o valor do parametro endereco ao atributo endereco 
+    }
+
+    //Metodos Getters & Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    //Metodo para fazer a concatenacao do ID, Nome e Endereco da empresa
+    @Override
+    public String toString() {
+        return "Empresa [ID = " + id + ", Nome = " + nome + ", Endereco = " + endereco + "]";
+    }
+    
+}
+
+
+//Declarando uma classe publica ArrancaEmpresa
+class ArrancaEmpresa {
+	
+	//Declarando o metodo principal 
+    public static void main(String[] args) {
+        Scanner valor = new Scanner(System.in); //Criando um objecto Scanner com o nome valor que sera usado para ler dados fornecidos pelo usuario via teclado 
+
+        System.out.print("Digite o ID da empresa: "); //Pedindo ao usuario para inserir o ID da empresa 
+        int id = valor.nextInt();
+        valor.nextLine(); //Limpando o buffer de entrada antes de ler a proxima linha de texto
+
+        System.out.print("Digite o nome da empresa: "); //Pedindo ao usuario para inserir o nome da empresa 
+        String nome = valor.nextLine();
+
+        System.out.print("Digite o endereco da empresa: "); //Pedindo ao usuario para inserir o endereco da empresa
+        String endereco = valor.nextLine();
+
+        Empresa empresa = new Empresa(id, nome, endereco);
+        System.out.println(empresa);
+
+        valor.close(); //Fechando a instancia da classe Scanner
+        
+    }
+    
+}
