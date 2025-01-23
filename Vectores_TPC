@@ -1,0 +1,154 @@
+package Vectores_TPC;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class DVD {
+    private int identificador;
+    private String nome;
+    private String genero;
+    private int anoLancamento;
+
+    public DVD(int identificador, String nome, String genero, int anoLancamento) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.genero = genero;
+        this.anoLancamento = anoLancamento;
+    }
+
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public int getAnoLancamento() {
+        return anoLancamento;
+    }
+}
+
+
+class DVDStore {
+    private List<DVD> dvdCollection;
+
+    public DVDStore() {
+        dvdCollection = new ArrayList<>();
+    }
+
+    public void listar() {
+        if (dvdCollection.isEmpty()) {
+            System.out.println("A prateleira está vazia.");
+        } else {
+            for (DVD dvd : dvdCollection) {
+                System.out.println("Identificador: " + dvd.getIdentificador() + ", Nome: " + dvd.getNome() +
+                        ", Gênero: " + dvd.getGenero() + ", Ano de Lançamento: " + dvd.getAnoLancamento());
+            }
+        }
+    }
+
+    public void atualizarGenero(int identificador, String novoGenero) {
+        for (DVD dvd : dvdCollection) {
+            if (dvd.getIdentificador() == identificador) {
+                dvd.setGenero(novoGenero);
+                System.out.println("Gênero do DVD com identificador " + identificador + " foi atualizado para " + novoGenero);
+                return;
+            }
+        }
+        System.out.println("DVD com identificador " + identificador + " não encontrado.");
+    }
+
+    public void remover(int identificador) {
+        for (DVD dvd : dvdCollection) {
+            if (dvd.getIdentificador() == identificador) {
+                dvdCollection.remove(dvd);
+                System.out.println("DVD com identificador " + identificador + " foi removido.");
+                return;
+            }
+        }
+        System.out.println("DVD com identificador " + identificador + " não encontrado.");
+    }
+
+    public void inserir(int identificador, String nome, String genero, int anoLancamento) {
+        for (DVD dvd : dvdCollection) {
+            if (dvd.getIdentificador() == identificador) {
+                System.out.println("Já existe um DVD com identificador " + identificador + ".");
+                return;
+            }
+        }
+        DVD newDVD = new DVD(identificador, nome, genero, anoLancamento);
+        dvdCollection.add(newDVD);
+        System.out.println("DVD com identificador " + identificador + " foi inserido.");
+    }
+
+    public String obterNomePorIndice(int indice) {
+        if (indice >= 0 && indice < dvdCollection.size()) {
+            return dvdCollection.get(indice).getNome();
+        }
+        return "Índice inválido.";
+    }
+
+    public void listarPorGenero(String genero) {
+        boolean filmesEncontrados = false;
+        for (DVD dvd : dvdCollection) {
+            if (dvd.getGenero().equalsIgnoreCase(genero)) {
+                System.out.println("Identificador: " + dvd.getIdentificador() + ", Nome: " + dvd.getNome() +
+                        ", Gênero: " + dvd.getGenero() + ", Ano de Lançamento: " + dvd.getAnoLancamento());
+                filmesEncontrados = true;
+            }
+        }
+        if (!filmesEncontrados) {
+            System.out.println("Nenhum filme encontrado com o gênero " + genero + ".");
+        }
+    }
+
+    public void listarPorAnoLancamento(int anoLancamento) {
+        boolean filmesEncontrados = false;
+        for (DVD dvd : dvdCollection) {
+            if (dvd.getAnoLancamento() == anoLancamento) {
+                System.out.println("Identificador: " + dvd.getIdentificador() + ", Nome: " + dvd.getNome() +
+                        ", Gênero: " + dvd.getGenero() + ", Ano de Lançamento: " + dvd.getAnoLancamento());
+                filmesEncontrados = true;
+            }
+        }
+        if (!filmesEncontrados) {
+            System.out.println("Nenhum filme encontrado com o ano de lançamento " + anoLancamento + ".");
+        }
+    }
+
+    public static void main(String[] args) {
+        DVDStore lojaDVD = new DVDStore();
+
+        // Inserir DVDs
+        lojaDVD.inserir(1, "Filme A", "Ação", 2000);
+        lojaDVD.inserir(2, "Filme B", "Comédia", 2005);
+        lojaDVD.inserir(3, "Filme C", "Drama", 2010);
+        lojaDVD.inserir(4, "Filme D", "Comédia", 2005);
+        lojaDVD.inserir(5, "Filme E", "Ação", 2000);
+
+        // Listar DVDs
+        lojaDVD.listar();
+
+        // Obter nome por índice
+        System.out.println("Nome do filme no índice 2: " + lojaDVD.obterNomePorIndice(2));
+
+        // Listar DVDs por gênero
+        System.out.println("\nFilmes do gênero Comédia:");
+        lojaDVD.listarPorGenero("Comédia");
+
+        // Listar DVDs por ano de lançamento
+        System.out.println("\nFilmes de 2005:");
+        lojaDVD.listarPorAnoLancamento(2005);
+    }
+}
+
+
