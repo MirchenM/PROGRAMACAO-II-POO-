@@ -1,0 +1,17 @@
+package POO_ArrayExercicio4;
+
+public class Array {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int [] array = {10, 2, 5, 25, 1, 3, 14};
+		int cont = 0;
+		for(int i = 0; i < array.length; i++) {
+			System.out.println(array[i] + " Posicao => " + 1);
+			
+		}
+		System.out.println(" O Array tem " + array.length + " posicoes ");
+		System.out.println(" O Array tem " + (array.length-1) + " elementos ");
+	}
+
+}
