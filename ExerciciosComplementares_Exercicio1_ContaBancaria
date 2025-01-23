@@ -1,0 +1,84 @@
+package ExerciciosComplementares_Exercicio1_ContaBancaria;
+
+class ContaCorrente {
+	public String titular;
+    public double saldo;
+
+    public ContaCorrente(String titular) {
+        this.titular = titular;
+        this.saldo = 0;
+    }
+
+    public void depositar(double valor) {
+        this.saldo += valor;
+    }
+
+    public double levantar(double valor) {
+        double taxaOperacao = valor * 0.005;
+        double valorTotal = valor + taxaOperacao;
+        if (this.saldo >= valorTotal) {
+            this.saldo -= valorTotal;
+            return valor;
+        } else {
+            return 0;
+        }
+    }
+
+    public double obterSaldo() {
+        return this.saldo;
+    }
+}
+
+
+class ContaCorrenteEspecial extends ContaCorrente {
+	public ContaCorrenteEspecial(String titular) {
+        super(titular);
+    }
+
+    @Override
+    public double levantar(double valor) {
+        double taxaOperacao = valor * 0.001;
+        double valorTotal = valor + taxaOperacao;
+        if (this.obterSaldo() >= valorTotal) {
+            this.saldo -= valorTotal;
+            return valor;
+        } else {
+            return 0;
+        }
+    }
+	
+}
+
+
+class Main {
+	public static void main(String[] args) {
+		
+        //Criando uma conta corrente e depositando 500 MZN
+        ContaCorrente conta1 = new ContaCorrente("Mirchen Miguel D. Maibaze");
+        conta1.depositar(500);
+        
+        //Levantando 200 MZN da conta corrente
+        double valorSacado = conta1.levantar(200);
+        System.out.println("O valor sacado foi: " + valorSacado);
+        System.out.println("O saldo atual e: " + conta1.obterSaldo());
+        
+        
+        //Criando uma conta corrente especial e depositando 1000 MZN
+        //ContaCorrenteEspecial conta2 = new ContaCorrenteEspecial("Miguel D. Maibaze");
+        //conta2.depositar(1000);
+        
+        //Levantando 1000 MZN da conta corrente especial
+        //valorSacado = conta2.levantar(1000);
+        //System.out.println("O valor sacado foi: " + valorSacado);
+        //System.out.println("O saldo atual e: " + conta2.obterSaldo());
+        
+    }
+}
+
+
+
+/* A classe ContaCorrente possui um construtor que recebe um titular e um saldo inicial (que por padrão é zero). 
+ * Ela também possui métodos para depositar uma quantia (depositar), levantar uma quantia (levantar) e obter o saldo 
+ * (obterSaldo). No método levantar, é debitada uma taxa de operação de 0.5% do valor levantado.
+A subclasse ContaCorrenteEspecial herda da classe ContaCorrente e redefine o método levantar para que a taxa de 
+operação seja de apenas 0.1% do valor levantado.*/
