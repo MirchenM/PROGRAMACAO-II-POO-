@@ -1,0 +1,73 @@
+package Ficha6Exercicio1;
+
+//Importando a classe Scanner do pacote java.util 
+import java.util.Scanner;
+
+//Declarando uma classe publica ManipuladorDeTexto
+class ManipuladorDeTexto {
+	
+	//Atributos
+    private String texto;
+
+    //Metodo para pedir que o usuario insira um texto 
+    public void readTextFromUser() {
+        Scanner lerDado = new Scanner(System.in);
+        System.out.println("Insira o texto:"); //Pedindo ao usuario para inserir um texto
+        texto = lerDado.nextLine();
+        lerDado.close(); //Fechando a instancia da classe Scanner
+    }
+
+    //Metodos Getters & Setters 
+    public String getText() {
+        return texto;
+    }
+
+    public String substring(int beginIndex, int endIndex) {
+        return texto.substring(beginIndex, endIndex);
+    }
+
+    public String trim() {
+        return texto.trim();
+    }
+
+    public String replace(String oldString, String newString) {
+        return texto.replace(oldString, newString);
+    }
+
+    public String toUpperCase() {
+        return texto.toUpperCase();
+    }
+
+    public String toLowerCase() {
+        return texto.toLowerCase();
+    }
+
+    public String[] split(String regex) {
+        return texto.split(regex);
+    }
+
+    public String valueOf(Object obj) {
+        return String.valueOf(obj);
+    }
+
+    //Declarando o metodo principal
+    public static void main(String[] args) {
+        ManipuladorDeTexto manipulator = new ManipuladorDeTexto();
+        manipulator.readTextFromUser();
+        //Impressao das mensagens 
+        System.out.println("O texto completo: " + manipulator.getText()); //Impressao do texto completo
+        System.out.println("O substring: " + manipulator.substring(2, 5)); //
+        System.out.println("O texto sem espacos em branco: " + manipulator.trim()); //Impressao do texto sem espacos em branco
+        System.out.println("O texto substituindo 'a' por 'b': " + manipulator.replace("a", "b")); //Impressao do texto substituindo o "a" por "b"
+        System.out.println("O texto em maiusculas: " + manipulator.toUpperCase()); //Impressao do texto a letras maiusculas
+        System.out.println("O texto em minusculas: " + manipulator.toLowerCase()); //Impressao do texto a letras minusculas
+        System.out.println("O texto dividido em palavras: ");
+        String[] words = manipulator.split(" ");
+        for (String word : words) {
+            System.out.println(word);
+        }
+        
+        //Impressao do valor numerico
+        System.out.println("O valor numerico e: " + manipulator.valueOf(42));
+    }
+}
