@@ -1,0 +1,40 @@
+package Exame2020_Exercicio4;
+
+//Importando a classe Scanner do pacote java.util 
+import java.util.Scanner;
+
+//Declaracao de uma classe publica 
+class BuscaValor {
+	//Declaracao do metodo principal 
+    public static void main(String[] args) {
+    	//Declaracao de um vector e instanciacao do mesmo com 10 posicoes
+        int[] vector = new int[10];
+        int tamanho = vector.length; //Atribuindo o tamanho do vector a variavel "tamanho"
+
+      try (//Preenche o vetor com valores inseridos via teclado pelo usuario 
+		Scanner valor = new Scanner(System.in)) {
+			System.out.println("Insira os valores do vector:"); //Mensagem na tela pedindo ao usuario para inserir valores no vector 
+			for (int i = 0; i < tamanho; i++) { //O loop inicia com i=0, vai executar o i repetidamente enquanto i < que o comprimento do vector e a cada iteracao, o i vai incrementar 1
+			    vector[i] = valor.nextInt(); //Le um valor do tipo inteiro da entrada do usuario usando o objecto "scanner" e atribui esse mesmo valor ao elemento do vector "vector"
+			}
+
+			//Leitura do valor x
+			System.out.println("Insira o valor a ser buscado:"); //Mensagem na tela pedindo ao usuario para inserir um valor a buscar dentro do vector 
+			int valorX = valor.nextInt();
+
+			//Busca no vector
+			boolean valorEncontrado = false; //Declarando variavel "valorEncontrado" do tipo "boolean" com o valor innicial "false"
+			System.out.print("As posicoes encontradas sao: "); //Mensagem a tela mostrando as posicoes que foram encontradas 
+			for (int i = 0; i < tamanho; i++) { //O loop inicia com i=0, vai executar o i repetidamente enquanto i < que o comprimento do vector e a cada iteracao, o i vai incrementar 1
+			    if (vector[i] == valorX) { //Testando se o valor do elemento do vetor "vector" no indice "i" e igual ao valor da variavel "x"
+			        System.out.print(i + " "); //Impressao do valor da variavel "i"
+			        valorEncontrado = true; //Atribuindo o valor "true" a variavel "valorEncontrado"
+			    }
+			}
+
+			if (!valorEncontrado) { //Condicao em que o valor nao seja encontrado 
+			    System.out.println("O valor " + valorX + " nao foi encontrado no vector!"); //Mensagem na tela dizendo que o valor nao foi encontrado no vector, ou seja, o valor inserido nao faz parte do vector
+			}
+		}
+    }
+}
