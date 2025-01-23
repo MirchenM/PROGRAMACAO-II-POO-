@@ -1,0 +1,111 @@
+package POO_Exercicio1;
+
+import java.util.Random;
+
+class Electrodomestico {
+	protected boolean estaLigado;
+    protected String marca;
+
+    public Electrodomestico(String marca) {
+        this.marca = marca;
+        this.estaLigado = false;
+    }
+
+    public void ligar() {
+        this.estaLigado = true;
+    }
+
+    public void desligar() {
+        this.estaLigado = false;
+    }
+
+    public String obterEstado() {
+        if (this.estaLigado) {
+            return "Ligado";
+        } else {
+            return "Desligado";
+        }
+    }
+}
+
+
+class Radio extends Electrodomestico {
+	
+	private static final String BANDA1 = "AM";
+    private static final String BANDA2 = "FM";
+    private int sintonia;
+    private int volume;
+    private String banda;
+
+    public Radio(String marca) {
+        super(marca);
+        this.sintonia = 0;
+        this.volume = 0;
+        this.banda = null;
+    }
+
+    @Override
+    public void ligar() {
+        super.ligar();
+        Random random = new Random();
+        this.sintonia = random.nextInt(108 - 88 + 1) + 88;  // Valor aleatório entre 88 e 108
+        this.volume = random.nextInt(10) + 1;  // Valor aleatório entre 1 e 10
+    }
+
+    @Override
+    public void desligar() {
+        super.desligar();
+        this.sintonia = 0;
+        this.volume = 0;
+        this.banda = null;
+    }
+
+    public void escolherBanda(String banda) {
+        if (banda.equals("1")) {
+            this.banda = BANDA1;
+        } else if (banda.equals("2")) {
+            this.banda = BANDA2;
+        } else {
+            System.out.println("Banda inválida");
+        }
+    }
+}
+
+
+class Televisor extends Electrodomestico {
+	private String referencia;
+    private int canal;
+    private int volume;
+
+    public Televisor(String marca, String referencia) {
+        super(marca);
+        this.referencia = referencia;
+        this.canal = 0;
+        this.volume = 0;
+    }
+
+    @Override
+    public void ligar() {
+        super.ligar();
+        Random random = new Random();
+        this.canal = random.nextInt(100) + 1;  // Valor aleatório entre 1 e 100
+        this.volume = random.nextInt(10) + 1;  // Valor aleatório entre 1 e 10
+    }
+
+    @Override
+    public void desligar() {
+        super.desligar();
+        this.canal = 0;
+        this.volume = 0;
+    }
+}
+
+class Principal {
+	public static void main(String[] args) {
+        Electrodomestico eletrodomestico = new Electrodomestico("Marca X");
+        Televisor televisor = new Televisor("Samsung", "ABC123");
+        Radio radio = new Radio("Sony");
+
+        System.out.println("Estado do eletrodomestico: " + eletrodomestico.obterEstado());  // Estado: Desligado
+	}
+}
