@@ -1,0 +1,277 @@
+package Miniteste2;
+
+//Importando as classes ArrayList e List do pacote java.util
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+//Interface Vendavel
+public interface Vendavel {
+	
+	//Declaracao de variaveis 
+	double getPreco();
+	int getQuantidadeEmEstoque();
+	void setQuantidadeEmEstoque(int i);
+
+}
+
+
+
+//Declaracao da classe publica ProdutoPerecivel
+class ProdutoPerecivel extends Produto {
+	
+	//Declaracao de variaveis 
+    private String dataValidade;
+
+    //Metodo construtor da classe ProdutoPerecivel com os parametros codigo, nome, preco, quantidadeEmEstoque e dataValidade
+    public ProdutoPerecivel(int codigo, String nome, double preco, int quantidadeEmEstoque, String dataValidade) {
+        super(codigo, nome, preco, quantidadeEmEstoque);
+        this.dataValidade = dataValidade; //Atribuindo o valor do parametro dataValidade ao atributo dataValidade
+    }
+
+    //Metodos Getters & Setters
+    public String getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(String dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+    
+}
+
+
+//Declaracao da classe publica  ProdutoNaoPerecivel
+class ProdutoNaoPerecivel extends Produto {
+	
+	//Declaracao de variaveis 
+	private String marca;
+
+	//Metodo construtor da classe ProdutoNaoPerecivel com os parametros codigo, nome, preco, qunatidadeEmEstoque e marca
+	public ProdutoNaoPerecivel(int codigo, String nome, double preco, int quantidadeEmEstoque, String marca) {
+		super(codigo, nome, preco, quantidadeEmEstoque);
+		this.marca = marca; //Atribuindo o valor do parametro marca ao atributo marca 
+	}
+
+	//Metodos Getters & Setters
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+}
+
+
+//Classe Produto
+class Produto implements Vendavel {
+	
+	//Declaracao de variaveis 
+    private int codigo;
+    private String nome;
+    private double preco;
+    private int quantidadeEmEstoque;
+
+    //Metodo construtor para da classe Produto com os parametros codigo, nome, preco e quantidadeEmEstoque
+    public Produto(int codigo, String nome, double preco, int quantidadeEmEstoque) {
+        this.codigo = codigo; //Atribuindo o valor do parametro codigo ao atributo codigo
+        this.nome = nome; //Atribuindo o valor do parametro nome ao atributo nome
+        this.preco = preco; //Atribuindo o valor do parametro preco ao atributo preco
+        this.quantidadeEmEstoque = quantidadeEmEstoque; //Atribuindo o valor do parametro quantidadeEmEstoque ao atribuito quantidadeEmEstoque
+    }
+
+    //Metodos Getters & Setters
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public int getQuantidadeEmEstoque() {
+        return quantidadeEmEstoque;
+    }
+
+    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+    
+}
+
+
+
+//Declaracao da classe publica CaixaRegistradora
+class CaixaRegistradora {
+
+	public void fecharCompra(CarrinhoDeCompras carrinho) { //Definindo um metodo fecharCompra na classe CaixaRegistradora com o parametro carrinho 
+		double totalCompra = carrinho.calcularTotal(); //Declarando uma variavel totalCompra do tipo double e sendo atribuida um valor que sera retornado pelo metodo calularTotal
+
+		//Atualizar a quantidade em estoque de cada produto vendido
+		for (Vendavel vendavel : carrinho.getItens()) {
+			int quantidadeVendida = vendavel.getQuantidadeEmEstoque(); //Declarando uma variavel quantidadeVendida do tipo int e sendo atribuido a ela o valor retornado pelo metodo getQuantidadeEmEstoque() do objeto vendavel que implementa a interface Vendavel
+			vendavel.setQuantidadeEmEstoque(vendavel.getQuantidadeEmEstoque() - quantidadeVendida); //Atualizando a quantidade em estoque de um objeto vendavel que implementa a interface Vendavel
+		}
+
+		System.out.println("Total da compra: " + totalCompra); //Imprimindo na tela o total da compra 
+	}
+ 
+}
+
+
+
+//Declaracao da classe publica CarrinhoDeCompras
+class CarrinhoDeCompras {
+	
+	//Declaracao de variaveis 
+	private List<Vendavel> itens;
+
+	//Metodo construtor da classe CarrinhoDeCompras sem parametros 
+	public CarrinhoDeCompras() {
+		this.itens = new ArrayList<>(); //Cria um objecto ArrayList vazio e o atribui a variavel de instancia itens
+	}
+
+	//Metodo adicionarVendavel para receber qualquer instancia de qualquer uma das classes 
+	public void adicionarVendavel(Vendavel vendavel) {
+		itens.add(vendavel);
+	}
+
+	//Metodo calcularTotal para percorrer a lista de vendaveis no carrinho e calcular o total da compra  
+	public double calcularTotal() {
+		double total = 0.0;
+		for (Vendavel vendavel : itens) {
+			total += vendavel.getPreco() * vendavel.getQuantidadeEmEstoque(); //Calculando o total da compra 
+		}
+		return total; //Retorno do valor total
+	}
+
+	public Vendavel[] getItens() {
+		return null;
+	}
+}
+
+
+
+//Declarando uma classe publica Main
+class Main {
+	
+	//Declaracao do metodo principal 
+    public static void main(String[] args) {
+    	
+    	///Criando um objecto Scanner chamado lerValor que sera usado para ler dados inseridos via teclado 
+        Scanner lerValor = new Scanner(System.in);
+
+        //Criacao dos produtos
+        System.out.println("Informe os dados do produto:"); //Pedindo ao usuario para informr os dados do produto 
+        Produto produto = criarProduto(lerValor);
+
+        System.out.println("Informe os dados do produto perecivel:"); //Pedindo ao usuario para informar os dados do produto perecivel
+        ProdutoPerecivel produtoPerecivel = criarProdutoPerecivel(lerValor);
+
+        System.out.println("Informe os dados do produto nao perecivel:"); //Pedindo ao usuario para informar os dados do produto nao perecivel
+        ProdutoNaoPerecivel produtoNaoPerecivel = criarProdutoNaoPerecivel(lerValor);
+
+        //Criacao do carrinho de compras
+        CarrinhoDeCompras carrinho = new CarrinhoDeCompras();
+        carrinho.adicionarVendavel(produto);
+        carrinho.adicionarVendavel(produtoPerecivel);
+        carrinho.adicionarVendavel(produtoNaoPerecivel);
+
+        //Calculo do total da compra
+        double totalCompra = carrinho.calcularTotal();
+
+        //Fechamento da compra
+        CaixaRegistradora caixa = new CaixaRegistradora();
+        caixa.fecharCompra(carrinho);
+
+        lerValor.close(); //Encerrando a recepcao de dados via teclado 
+        
+    }
+
+    //Metodo para criar um objeto Produto com os dados informados pelo usuario
+    private static Produto criarProduto(Scanner lerValor) {
+        System.out.print("Codigo do produto: "); //Pedindo ao usuario para inserir o codigo do produto 
+        int codigo = lerValor.nextInt();
+        lerValor.nextLine(); //Criando espacamento 
+
+        System.out.print("Nome do produto: "); //Pedindo ao usuario para inserir o nome do produto 
+        String nome = lerValor.nextLine();
+
+        System.out.print("Preco do produto: "); //Pedindo ao usuario para inserir o preco do produto 
+        double preco = lerValor.nextDouble();
+        lerValor.nextLine(); //Criando espacamanto
+
+        System.out.print("Quantidade em estoque do produto: "); //Pedindo ao usuario para inserir a quantidade em estoque do produto
+        int quantidadeEmEstoque = lerValor.nextInt(); 
+        lerValor.nextLine(); //Criando espacamento 
+
+        return new Produto(codigo, nome, preco, quantidadeEmEstoque); //Retorno do codigo, nome, preco e quantidade em estoque do produto
+        
+    }
+
+    //Metodo para criar um objeto ProdutoPerecivel com os dados informados pelo usuario
+    private static ProdutoPerecivel criarProdutoPerecivel(Scanner lerValor) {
+        System.out.print("Codigo do produto perecivel: "); //Pedindo ao usuario para inserir o codigo do produto perecivel
+        int codigo = lerValor.nextInt();
+        lerValor.nextLine(); //Criando espacamento 
+
+        System.out.print("Nome do produto perecivel: "); //Pedindo ao usuario para inserir o nome do produto perecivel
+        String nome = lerValor.nextLine();
+
+        System.out.print("Preco do produto perecivel: "); //Pedindo ao usuario para inserir o preco do produto perecivel 
+        double preco = lerValor.nextDouble();
+        lerValor.nextLine(); //Criando espacamento
+
+        System.out.print("Quantidade em estoque do produto perecivel: "); //Pedindo ao usuario para inserir a quantidade em estoque do produto perecivel
+        int quantidadeEmEstoque = lerValor.nextInt();
+        lerValor.nextLine(); //Criando espacamento
+
+        System.out.print("Data de validade do produto perecivel: "); //Pedindo ao usuario para inserir a data de validade do produto perecivel
+        String dataValidade = lerValor.nextLine();
+
+        return new ProdutoPerecivel(codigo, nome, preco, quantidadeEmEstoque, dataValidade); //Retorno do codigo, nome, preco, quantidade em estoque e data de validade do produto perecivel
+                
+    }
+
+    //Metodo para criar um objeto ProdutoNaoPerecivel com os dados informados pelo usuario
+    private static ProdutoNaoPerecivel criarProdutoNaoPerecivel(Scanner lerValor) {
+        System.out.print("Codigo do produto nao perecivel: "); //Pedindo ao usuario para inserir o codigo do produto nao perecivel
+        int codigo = lerValor.nextInt();
+        lerValor.nextLine(); //Criando espacamento
+
+        System.out.print("Nome do produto nao perecivel: "); //Pedindo ao usuario para inserir o nome do produto nao perecivel
+        String nome = lerValor.nextLine();
+
+        System.out.print("Preco do produto nao perecivel: "); //Pedindo ao usuario para inserir o preco do produto nao perecivel 
+        double preco = lerValor.nextDouble();
+        lerValor.nextLine(); //Criando espacamento 
+
+        System.out.print("Quantidade em estoque do produto nao perecivel: "); //Pedindo ao usuario para inserir a quantidade em estoque do produto nao perecivel 
+        int quantidadeEmEstoque = lerValor.nextInt();
+        lerValor.nextLine(); //Criando espacamento 
+
+        System.out.print("Marca do produto nao perecivel: "); //Pedindo ao usuario para inserir a marca do produto nao perecivel
+        String marca = lerValor.nextLine();
+
+        return new ProdutoNaoPerecivel(codigo, nome, preco, quantidadeEmEstoque, marca); //Retorno do codigo, nome, preco, quantidade em estoque e marca do produto nao perecivel
+        
+    }
+    
+}
