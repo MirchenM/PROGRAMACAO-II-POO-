@@ -1,0 +1,154 @@
+package Exame2020_Exercicio6;
+
+import java.util.Scanner;
+import java.util.Vector;
+
+//Declarando uma classe Produto do tipo abstracta 
+abstract class Produto {
+	//Declaracao de variaveis 
+    private String nomeLoja;
+    private double preco;
+    private String descricao;
+
+    //Metodo construtor para a classe Produto com os parametros nomeLoja; preco; descricao
+    public Produto(String nomeLoja, double preco, String descricao) { 
+        this.nomeLoja = nomeLoja; //Atribuindo o valor do parametro "nomeLoja" ao atributo "nomeLoja"
+        this.preco = preco; //Atribuindo o valor do parametro "preco" ao atributo "preco"
+        this.descricao = descricao; //Atribuindo o valor do parametro "descricao" ao atributo "descricao"
+    }
+
+    //Metodos Gettes & Setters
+    public String getNomeLoja() {
+        return nomeLoja;
+    }
+
+    public void setNomeLoja(String nomeLoja) {
+        this.nomeLoja = nomeLoja;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public abstract String getDescricaoDetalhada();
+}
+
+
+//Declarando a classe filha Mouse 
+class Mouse extends Produto {
+
+	//Declaracao de variaveis 
+    private String tipo;
+
+    //Metodo construtor para a classe Mouse com os parametros nomeLoja; preco; descricao; tipo
+    public Mouse(String nomeLoja, double preco, String descricao, String tipo) {
+        super(nomeLoja, preco, descricao); //Chama o construtor da classe pai Produto e repassa os valores dos parametros para inicializar os atributos da classe pai
+        this.tipo = tipo; //Atibuindo o valor do  parametro "tipo" ao atributo "tipo
+    }
+
+    //Metodos Getters & Setters 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    //Metodo para obter a descricao detalhada sobre o tipo de Mouse 
+    @Override
+    public String getDescricaoDetalhada() {
+        return getDescricao() + " - Tipo: " + tipo;
+    }
+}
+
+
+//Declarando a classe filha Livro 
+class Livro extends Produto {
+	//Declaracao de variaveis 
+    private String autor;
+
+    //Metodo construtor Livro com os parametros nomeLoja; preco; descricao; autor
+    public Livro(String nomeLoja, double preco, String descricao, String autor) {
+        super(nomeLoja, preco, descricao); ////Chama o construtor da classe pai Produto e repassa os valores dos parametros para inicializar os atributos da classe pai
+        this.autor = autor; //Atribui o valor do parametro "autor" ao atributo "autor"
+    }
+
+    //Metodos Getters & Setters 
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    //Metodo para obter a descricao detalhada do autor do Livro 
+    @Override
+    public String getDescricaoDetalhada() {
+        return getDescricao() + " - Autor: " + autor;
+    }
+}
+
+//Declaracao do metdo publico Main
+class Main {
+	//Declaracao do metodo principal
+    public static void main(String[] args) {
+        Vector<Produto> carrinho = new Vector<>(); //Declarando uma variavel chamada carrinho do tipo Vector<Produto> e a inicializa com um novo objeto Vector vazio
+        
+        Scanner valor = new Scanner(System.in); //Criando um objecto do tipo Scanner com o nome valor
+        
+        System.out.println("Simulador de compra"); //Simulador de Compra
+        
+        System.out.println("Quantidade de Mouses a adicionar ao carrinho:"); //Perguntando ao usuario quantos Mouses ele gostaria de adicionar ao carrinho 
+        int quantidadeMouse = valor.nextInt();
+        
+        for (int i = 0; i < quantidadeMouse; i++) {
+            System.out.println("Dados do Mouse " + (i+1) + ":"); //Pedindo ao usuario para inserir os dados do Mouse 
+            
+            System.out.println("Nome da Loja:"); //Pedindo ao usuario para inserir o nome da loja
+            String nomeLojaMouse = valor.next();
+            
+            System.out.println("Preco:"); //Pedindo o preco do Mouse (MZN)
+            double precoMouse = valor.nextDouble();
+            
+            System.out.println("Tipo:"); //Pedindo o tipo do Mouse
+            String tipoMouse = valor.next();
+            
+            carrinho.add(new Mouse(nomeLojaMouse, precoMouse, "Mouse", tipoMouse)); //Mostrando na tela o nome da Loja, o Preco, o Mouse e o tipo de Mouse
+        }
+        
+        System.out.println("Quantidade de Livros a adicionar ao carrinho:"); //Perguntando ao usuario quantos Livros ele gostaria de adicionar ao carrinho
+        int quantidadeLivro = valor.nextInt();
+        
+        for (int i = 0; i < quantidadeLivro; i++) {
+            System.out.println("Dados do Livro " + (i+1) + ":"); //Pedindo ao usuario para inserir os dados do Livro 
+            
+            System.out.println("Nome da Loja:"); //Pedindo ao usuario para inserir o nome da Loja
+            String nomeLojaLivro = valor.next();
+            
+            System.out.println("Preco:"); //Pedindo o preco do Livro (MZN)
+            double precoLivro = valor.nextDouble();
+            
+            System.out.println("Autor:"); //Pedindo ao usuario para inserir o Autor do Livro 
+            String autorLivro = valor.next();
+            
+            carrinho.add(new Livro(nomeLojaLivro, precoLivro, "Livro", autorLivro)); //Mostrando na tela o nome da Loja, o preco do Livro, o Livro e o autor do Livro
+        }
+        
+        System.out.println("Descricao dos produtos no carrinho:"); //Mostrando uma descricao dos produtos que se encontram no carrinho 
+        for (Produto produto : carrinho) {
+            System.out.println(produto.getDescricaoDetalhada()); //Descricao detalhada dos produtos do carrinho 
+        }
+        
+        valor.close(); //Indicando que nao serao mais lidos valores inseridos por teclado 
+    }
+}
