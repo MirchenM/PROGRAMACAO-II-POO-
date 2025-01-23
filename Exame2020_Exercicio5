@@ -1,0 +1,129 @@
+package Exame2020_Exercicio5;
+
+import java.util.Vector;
+import java.util.Scanner;
+
+//Declarando uma classe publica ContaCorrente
+class ContaCorrente {
+	//Atributos 
+    private String numBI;
+    private float saldo;
+    private String mes;
+    private double despesas;
+
+    //Metodo construtor da classe ContaCorrente com os parametros numBI, saldo, mes e despesas
+    public ContaCorrente(String numBI, float saldo, String mes, double despesas) {
+        this.numBI = numBI;
+        this.saldo = saldo;
+        this.mes = mes;
+        this.despesas = despesas;
+    }
+
+    //Metodos Getters & Setters 
+    public String getNumBI() {
+        return numBI;
+    }
+
+    public void setNumBI(String numBI) {
+        this.numBI = numBI;
+    }
+
+    public float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public double getDespesas() {
+        return despesas;
+    }
+
+    public void setDespesas(double despesas) {
+        this.despesas = despesas;
+    }
+}
+
+
+class ContaCorrenteDespesas extends ContaCorrente {
+    
+    public ContaCorrenteDespesas(String numBI, float saldo, String mes, double despesas) {
+        super(numBI, saldo, mes, despesas);
+    }
+
+    public static Vector<ContaCorrenteDespesas> filtrarContas(Vector<ContaCorrenteDespesas> contas) {
+        Vector<ContaCorrenteDespesas> contasFiltradas = new Vector<>();
+
+        for (ContaCorrenteDespesas conta : contas) {
+            if (conta.getMes().equalsIgnoreCase("Agosto") && conta.getDespesas() > conta.getSaldo()) {
+                contasFiltradas.add(conta);
+            }
+        }
+
+        return contasFiltradas;
+    }
+}
+
+
+class Main {
+    public static void main(String[] args) {
+        Vector<ContaCorrente> contas = new Vector<>();
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Insira a quantidade de contas correntes a serem cadastradas:");
+        int quantidade = scanner.nextInt();
+        
+        for (int i = 0; i < quantidade; i++) {
+            System.out.println("Insira os dados da conta corrente " + (i+1) + ":");
+            
+            System.out.println("Insira o numero do BI:");
+            String numBI = scanner.next();
+            
+            System.out.println("Insira o saldo:");
+            float saldo = scanner.nextFloat();
+            
+            System.out.println("Insira o mes:");
+            String mes = scanner.next();
+            
+            System.out.println("Despesas previstas:");
+            double despesas = scanner.nextDouble();
+            
+            contas.add(new ContaCorrente(numBI, saldo, mes, despesas));
+        }
+        
+        Vector<ContaCorrente> contasFiltradas = filtrarContas(contas);
+        
+        System.out.println("Contas correntes com despesas previstas para Agosto maiores que o saldo:");
+        for (ContaCorrente conta : contasFiltradas) {
+            System.out.println("Numero do BI: " + conta.getNumBI());
+            System.out.println("Saldo: " + conta.getSaldo());
+            System.out.println("Mes: " + conta.getMes());
+            System.out.println("Despesas previstas: " + conta.getDespesas());
+            System.out.println();
+        }
+        
+        scanner.close();
+    }
+
+    public static Vector<ContaCorrente> filtrarContas(Vector<ContaCorrente> contas) {
+        Vector<ContaCorrente> contasFiltradas = new Vector<>();
+
+        for (ContaCorrente conta : contas) {
+            if (conta.getMes().equalsIgnoreCase("Agosto") && conta.getDespesas() > conta.getSaldo()) {
+                contasFiltradas.add(conta);
+            }
+        }
+
+        return contasFiltradas;
+    }
+}
