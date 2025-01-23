@@ -1,0 +1,210 @@
+package Exame2021_Exercicio5;
+
+import java.util.Vector;
+import java.util.Scanner;
+
+//Declaracao de uma interface Comportamento 
+public interface Comportamento {
+    void adicionaPessoa(int id, String nome, int idade, float altura);
+    void removePessoa(int id);
+    Pessoa buscaPessoa(int idade);
+    Pessoa buscaNome(String nome);
+    Vector<Pessoa> relatorio();
+    
+}
+
+
+//Declaracao da classe publica "Estudante" que implementa a interface "Comportameto"
+class Estudante implements Comportamento {
+	//Declaracao de variaveis 
+    private Vector<Pessoa> pessoas;
+
+    //Metodo da classe Estudante 
+    public Estudante() {
+        pessoas = new Vector<>();
+    }
+
+    //Metodo para adicionar pessoa que vai pedir que se insira o ID, o nome, a idade e a altura da pessoa  
+    @Override
+    public void adicionaPessoa(int id, String nome, int idade, float altura) {
+        Pessoa pessoa = new Pessoa(id, nome, idade, altura);
+        pessoas.add(pessoa);
+    }
+
+    //Metodo para remover a pessoa usando o seu ID 
+    @Override
+    public void removePessoa(int id) {
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getId() == id) {
+                pessoas.remove(pessoa);
+                break;
+            }
+        }
+    }
+
+    //Metodo para buscar a pessoa usando a sua idade
+    @Override
+    public Pessoa buscaPessoa(int idade) {
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getIdade() == idade) {
+                return pessoa;
+            }
+        }
+        return null;
+    }
+
+    //Metodo para buscar o nome usando o seu nome 
+    @Override
+    public Pessoa buscaNome(String nome) {
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getNome().equals(nome)) {
+                return pessoa;
+            }
+        }
+        return null;
+    }
+
+    //Metodo para apresentar o relatorio 
+    @Override
+    public Vector<Pessoa> relatorio() {
+        return pessoas;
+    }
+}
+
+
+//Declaracao de uma classe publica "Pessoa"
+ class Pessoa {
+	
+	//Declaracao de variaveis 
+    private int id;
+    private String nome;
+    private int idade;
+    private float altura;
+
+    //Metodo construtor para a classe "Pessoa"
+    public Pessoa(int id, String nome, int idade, float altura) {
+        this.id = id; //Atribui o valor fornecido como parametro "id" ao atributo "id" da propria instancia da classe "Pessoa"
+        this.nome = nome; //Atribui o valor fornecido como parametro "nome" ao atributo "nome" da propria instancia da classe "Pessoa"
+        this.idade = idade; //Atribui o valor fornecido como parametro "idade" ao atributo "idade" da propria instancia da classe "Pessoa"
+        this.altura = altura; //Atribui o valor fornecido como parametro "altura" ao atributo "altura" da propria instancia da classe "Pessoa"
+    }
+
+    //Getters e Setters 
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+    //Metodo toString para devolver e imprimir o vector
+    @Override
+    public String toString() { 
+        return "Pessoa [ID: " + id + ", Nome: " + nome + ", Idade: " + idade + ", Altura: " + altura + " metros ]";
+    }
+}
+
+
+//Declaracao de uma classe publica "Principal"
+ class Principal {
+	
+	//Declaracao do metodo principal
+    public static void main(String[] args) {
+    	//Criando um objecto "Estudante" e atribuindo a esse objceto o valor "estudante"
+        Estudante estudante = new Estudante();
+        
+        //Criando um objecto "Scanner" e associando-o a variavel "valor"
+        Scanner valor = new Scanner(System.in);
+
+        //Declaracao da variavel "exit" e inicializada com o valor logico "false"
+        boolean exit = false;
+        while (!exit) { //Enquanto a variavel "exit" tiver o valor falso, o programa fara:
+        	System.out.println("\t--------------------Menu de Opcoes------------------\n");
+            System.out.println("Escolha uma Opcao: "); //Mensagem na tela dizendo ao usuario para escolher uma opcao
+            System.out.println("1. Adicionar uma Pessoa"); //Mensagem na tela mostrando a 1a opcao "Adicionar uma Pessoa"
+            System.out.println("2. Eliminar uma Pessoa"); //Mensagem na tela mostrando a 2a opcao "Remover uma Pessoa"
+            System.out.println("3. Procurar Pessoa pela sua Idade"); //Mensagem na tela mostrando a 3a opcao "Buscar Pessoa pela sua Idade"
+            System.out.println("4. Procurar Pessoa pelo seu Nome"); //Mensagem na tela mostrando a 4a opcao "Buscar Pessoa pelo seu Nome"
+            System.out.println("5. Exibir Relatorio "); //Mensagem na tela mostrando a 5a opcao "Exibicao do Relatorio"
+            System.out.println("6. Exit"); //Mensagem na tela mostrando a 6a opcao "Exit/Sair"
+            System.out.print("Opcao: "); //Mensagem na tela exibindo a mensagem "Opcao:"
+            int opcao = valor.nextInt();
+
+            //Apresentacao dos casos 
+            switch (opcao) {
+                case 1: //Primeiro caso: Onde pessoas sao adicionadas
+                    System.out.print("ID: "); //Pedindo ao usuario para inserir o ID
+                    int id = valor.nextInt();
+                    valor.nextLine();  // Consumir a quebra de linha
+                    System.out.print("Nome: "); //Pedindo ao usuario para inserir o nome 
+                    String nome = valor.nextLine();
+                    System.out.print("Idade: "); //Pedindo ao usuario para inserir a idade 
+                    int idade = valor.nextInt();
+                    System.out.print("Altura: "); //Pedindo ao usuario para inserir a altura 
+                    float altura = valor.nextFloat();
+                    estudante.adicionaPessoa(id, nome, idade, altura);
+                    System.out.println("A pessoa foi adicionada com sucesso!"); //Mensagem na tela informando que a pessoa foi adicionada com sucesso 
+                    break; //Imterrompendo o primeiro caso
+                    
+                case 2: //Segundo caso: Onde pessoas sao removidas
+                    System.out.print("Insira o ID da pessoa a ser removida: "); //Mensagem na tela pedindo que se insira o ID da pessoa a ser removida 
+                    int idRemover = valor.nextInt();
+                    estudante.removePessoa(idRemover);
+                    System.out.println("A pessoa foi removida com sucesso!"); //Mensagem na tela informando que a pessoa foi removida com sucesso 
+                    break; //Interrompendo o segundo caso
+                    
+                case 3: //Terceiro caso:Onde buscam-se pessoas pela sua idade 
+                    System.out.print("Insira a idade da pessoa a ser procurada : "); //Mensagem na tela pedindo que se insira a idade da pessoa a ser procurada 
+                    int idadeBuscar = valor.nextInt();
+                    Pessoa pessoaIdade = estudante.buscaPessoa(idadeBuscar);
+                    if (pessoaIdade != null) {
+                        System.out.println("Insira a pessoa encontrada pela idade : " + pessoaIdade); //Mensagem na tela informando a pessoa encontrada pela idade 
+                    } else {
+                        System.out.println("A pessoa inserida nao foi encontrada pela idade!"); //Mensagem na tela informando que a pessoa inserida nao foi encontrada pela idade
+                    }
+                    break; //Interrompendo o terceiro caso
+                    
+                case 4: //Quarto caso: Onde buscam-se pessoas pelo seu nome 
+                    valor.nextLine();  // Consumir a quebra de linha
+                    System.out.print("Insira o nome da pessoa a ser procurada : "); //Mensagem na tela pedindo que se insira o nome da pessoa a ser procurada 
+                    String nomeBuscar = valor.nextLine();
+                    Pessoa pessoaNome = estudante.buscaNome(nomeBuscar);
+                    if (pessoaNome != null) {
+                        System.out.println("A pessoa encontrada pelo nome foi : " + pessoaNome); //Mensagem na tela informando que a pessoa encontrada pelo nome 
+                    } else {
+                        System.out.println("A pessoa nao foi encontrada pelo nome!"); //Mensagem na tela informando que a pessoa nao foi encontrada pelo nome 
+                    }
+                    break; //Interrompendo o quarto caso 
+                    
+                case 5: //Quinto caso: Exibicao do relatorio
+                    Vector<Pessoa> relatorio = estudante.relatorio();
+                    System.out.println("Relatorio:"); //Relatorio 
+                    for (Pessoa pessoa : relatorio) {
+                        System.out.println(pessoa);
+                    }
+                    break; //Interrompendo o quinto caso 
+                    
+                case 6: //Sexto caso: Saida do menu 
+                    exit = true; //Atribuicao do valor logico "true" a variavel "exit"
+                    break; //Interrompendo o sexto caso 
+                    
+                default:
+                    System.out.println("Opcao invalida!"); //Mensagem na tela informando que a opcao inserida e invalida 
+                    break;
+            }
+
+            System.out.println();
+        }
+
+        valor.close(); //Fechando o fluxo de entrada
+    }
+}
