@@ -1,0 +1,212 @@
+package ExerciciosComplementares_Zoologico;
+
+class Animal {
+	private String nome;
+    private double comprimento;
+    public int numPatas;
+    private String cor;
+    private String ambiente;
+    private double velocidade;
+    private int tempoTreino;
+    private double espacoPercorrido;
+
+    //Construtor padrao
+    public Animal() {
+        this.numPatas = 4;
+        this.ambiente = "Terra";
+        this.cor = "Branco";
+        this.tempoTreino = 30;
+    }
+
+    //Construtor com atributos
+    public Animal(String nome, double comprimento, int numPatas, String cor, String ambiente, double velocidade, int tempoTreino) {
+        this.nome = nome;
+        this.comprimento = comprimento;
+        this.numPatas = numPatas;
+        this.cor = cor;
+        this.ambiente = ambiente;
+        this.velocidade = velocidade;
+        this.tempoTreino = tempoTreino;
+    }
+
+    //Metodos getters & setters
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(double comprimento) {
+        this.comprimento = comprimento;
+    }
+
+    public int getNumPatas() {
+        return numPatas;
+    }
+
+    public void setNumPatas(int numPatas) {
+        this.numPatas = numPatas;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getAmbiente() {
+        return ambiente;
+    }
+
+    public void setAmbiente(String ambiente) {
+        this.ambiente = ambiente;
+    }
+
+    public double getVelocidade() {
+        return velocidade;
+    }
+
+    public void setVelocidade(double velocidade) {
+        this.velocidade = velocidade;
+    }
+
+    public int getTempoTreino() {
+        return tempoTreino;
+    }
+
+    public void setTempoTreino(int tempoTreino) {
+        this.tempoTreino = tempoTreino;
+    }
+
+    public double getEspacoPercorrido() {
+        return espacoPercorrido;
+    }
+
+    public void setEspacoPercorrido(double espacoPercorrido) {
+        this.espacoPercorrido = espacoPercorrido;
+    }
+
+    
+    
+    //Metodo para calcular o espaco percorrido
+    public void calcularEspacoPercorrido() {
+        this.espacoPercorrido = this.velocidade / this.tempoTreino;
+    }
+
+    //Metodo toString
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "nome ='" + nome + '\'' +
+                ", comprimento =" + comprimento +
+                ", numPatas =" + numPatas +
+                ", cor ='" + cor + '\'' +
+                ", ambiente ='" + ambiente + '\'' +
+                ", velocidade =" + velocidade +
+                ", tempoTreino =" + tempoTreino +
+                ", espacoPercorrido =" + espacoPercorrido +
+               '}';
+    }
+	
+}
+
+class Mamifero extends Animal {	
+	private String cor;
+    private String alimento;
+
+    public Mamifero(String nome, double comprimento, double velocidade, int tempoTreino, String cor, String alimento) {
+        super(nome, comprimento, velocidade, tempoTreino, 4, "Terra");
+        this.cor = cor;
+        this.alimento = alimento;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getAlimento() {
+        return alimento;
+    }
+
+    public void setAlimento(String alimento) {
+        this.alimento = alimento;
+    }
+
+    @Override
+    public String toString() {
+        return "Mamifero{" +
+                "nome='" + super.getNome() + '\'' +
+                ", comprimento=" + super.getComprimento() +
+                ", velocidade=" + super.getVelocidade() +
+                ", tempoTreino=" + super.getTempoTreino() +
+                ", numPatas=" + super.getNumPatas() +
+                ", ambiente='" + super.getAmbiente() + '\'' +
+                "cor='" + cor + '\'' +
+                ", alimento='" + alimento + '\'' +
+                '}';
+    }
+    
+}
+
+
+class Peixe extends Animal {
+	private String barbatanas;
+    private String cauda;
+
+    public Peixe(String nome, double comprimento, String ambiente, double velocidade, int tempoTreino, String barbatanas, String cauda) {
+        super(nome, comprimento, 0, "cinzenta", ambiente, velocidade, tempoTreino);
+        this.barbatanas = barbatanas;
+        this.cauda = cauda;
+    }
+
+    public Peixe(String nome, double comprimento, String ambiente, double velocidade, int tempoTreino) {
+        super(nome, comprimento, 0, "cinzenta", ambiente, velocidade, tempoTreino);
+        this.barbatanas = "barbatanas";
+        this.cauda = "cauda";
+    }
+
+    //Metodos getters & setters
+    public String getBarbatanas() {
+        return barbatanas;
+    }
+
+    public void setBarbatanas(String barbatanas) {
+        this.barbatanas = barbatanas;
+    }
+
+    public String getCauda() {
+        return cauda;
+    }
+
+    public void setCauda(String cauda) {
+        this.cauda = cauda;
+    }
+
+    @Override
+    public String toString() {
+        return "Peixe{" +
+                "nome='" + getNome() + '\'' +
+                ", comprimento=" + getComprimento() +
+                ", numPatas=" + getNumPatas() +
+                ", cor='" + getCor() + '\'' +
+                ", ambiente='" + getAmbiente() + '\'' +
+                ", velocidade=" + getVelocidade() +
+                ", tempoTreino=" + getTempoTreino() +
+                ", barbatanas='" + barbatanas + '\'' +
+                ", cauda='" + cauda + '\'' +
+                '}';
+    }
+	
+}
