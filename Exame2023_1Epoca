@@ -1,0 +1,146 @@
+package Exame2023_1Epoca;
+
+import java.util.Scanner; 
+
+interface CalcularComissao {
+    double calcComissao(double vendas);
+
+}
+
+
+class Teste {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Leitura dos valores do trabalhador
+        System.out.print("Número de Trabalhador: ");
+        int numeroTrabalhador = scanner.nextInt();
+        scanner.nextLine(); // Consumir a quebra de linha pendente
+
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Departamento: ");
+        String departamento = scanner.nextLine();
+
+        System.out.print("Salário: ");
+        double salario = scanner.nextDouble();
+
+        System.out.print("Turno: ");
+        String turno = scanner.next();
+
+        System.out.print("Valor de Vendas: ");
+        double valorVendas = scanner.nextDouble();
+
+        // Criação do objeto TrabalhadorATempoParcial com os valores fornecidos
+        TrabalhadorATempoParcial trabalhador = new TrabalhadorATempoParcial(numeroTrabalhador, nome, departamento, salario, turno, valorVendas);
+
+        // Impressão dos detalhes do trabalhador
+        System.out.println("\nDetalhes do Trabalhador:");
+        trabalhador.imprimirDetalhes();
+
+        // Cálculo da comissão do trabalhador
+        double comissao = trabalhador.calcComissao(valorVendas);
+        System.out.println("Comissão: " + comissao);
+        scanner.close();
+    }
+}
+
+
+class Trabalhador {
+	private int numeroTrabalhador;
+    private String nome;
+    private String departamento;
+    private double salario;
+
+    public Trabalhador(int numeroTrabalhador, String nome, String departamento, double salario) {
+        this.numeroTrabalhador = numeroTrabalhador;
+        this.nome = nome;
+        this.departamento = departamento;
+        this.salario = salario;
+    }
+
+    public int getNumeroTrabalhador() {
+        return numeroTrabalhador;
+    }
+
+    public void setNumeroTrabalhador(int numeroTrabalhador) {
+        this.numeroTrabalhador = numeroTrabalhador;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public void imprimirDetalhes() {
+        System.out.println("Número de Trabalhador: " + numeroTrabalhador);
+        System.out.println("Nome: " + nome);
+        System.out.println("Departamento: " + departamento);
+        System.out.println("Salário: " + salario);
+    }
+}
+
+
+class TrabalhadorATempoParcial extends Trabalhador implements CalcularComissao {
+    private String turno;
+    private double valorVendas;
+
+    public TrabalhadorATempoParcial(int numeroTrabalhador, String nome, String departamento, double salario, String turno, double valorVendas) {
+        super(numeroTrabalhador, nome, departamento, salario);
+        this.turno = turno;
+        this.valorVendas = valorVendas;
+    }
+
+    //Metodos Getters & Setters 
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public double getValorVendas() {
+        return valorVendas;
+    }
+
+    public void setValorVendas(double valorVendas) {
+        this.valorVendas = valorVendas;
+    }
+
+    @Override
+    public void imprimirDetalhes() {
+        super.imprimirDetalhes();
+        System.out.println("Turno: " + turno);
+        System.out.println("Valor de Vendas: " + valorVendas);
+    }
+
+    @Override
+    public double calcComissao(double vendas) {
+        if (vendas > 6000.00) {
+            return getSalario() * 0.2;
+        } else {
+            return getSalario() * 0.05;
+        }
+    }
+}
