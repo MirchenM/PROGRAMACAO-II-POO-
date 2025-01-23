@@ -1,0 +1,91 @@
+package Exercicio91;
+
+class Funcionario {
+
+	//Classes privates
+	private int numeroFuncionario;
+	private String nome;
+	private int idade;
+	private String cargo;
+	private double salario;
+		
+	public Funcionario() {
+		salario = 1500.00;
+	}
+	
+	public Funcionario(String nome, int idade) {
+		this.nome = nome;
+		this.idade = idade;
+		salario = 0.0;	
+	}
+		
+	public Funcionario(int numeroFuncionario, String nome, double salario) {
+		this.numeroFuncionario = numeroFuncionario;
+		this.nome = nome;
+		this.salario = salario;
+	}
+		
+	public int getNumeroFuncionario() {
+		return numeroFuncionario;
+	}
+		
+	public void setNumeroFuncionario(int numeroFuncionario) {
+		this.numeroFuncionario = numeroFuncionario;
+	}
+		
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;	
+	}
+	
+	public int getIdade() {
+		return idade;
+	}
+	
+	public void setIdade(int idade) {
+		this.idade = idade;		
+	}
+	
+	public String getCargo() {
+		return cargo;
+	}
+		
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+		
+	public double getSalario() {
+		return salario;
+	}
+	
+	public void setSalario(double salario) {
+		this.salario = salario;
+	}
+	
+}
+
+
+class Teste10 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Instanciacao do funcionario usando o construtor sem parametros
+		Funcionario f1 = new Funcionario();
+		System.out.println("Nome: " + f1.getNome() + ", Salario: " + f1.getSalario());
+		
+		
+		//Instanciacao do funcionario usando o construtor com parametros de nome e idade
+		Funcionario f2 = new Funcionario("Cesar", 20);
+		System.out.println("Nome: " + f2.getNome() + ", Idade: " + f2.getIdade() + ", Salario: " + f2.getSalario());
+		
+		
+		//Instanciacao do funcionario usando o contrutor com parametros de numero, nome e salario
+		Funcionario f3 = new Funcionario(6373, "Mirchen", 2500.00);
+		 System.out.println("Matricula: " + f3.getNumeroFuncionario() + ", Nome: " + f3.getNome() + ", Salario: " + f3.getSalario());
+	}
+
+}
