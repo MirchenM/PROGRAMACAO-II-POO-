@@ -1,0 +1,109 @@
+package ExerciciosComplementares_Exercicio2_LojaDeVendaDeProductos;
+
+class Produto {
+	private String nome;
+	private double preco;
+	
+	public Produto(String nome, double preco) {
+		this.nome = nome;
+		this.preco = preco;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public double getPreco() {
+		return preco;
+	}
+	
+	
+	public String toSTring() {
+		return nome + " - MZN " + preco;
+	}
+	
+}
+
+class CD extends Produto {
+	private int numFaixas;
+	
+	public CD(String nome, double preco, int numFaixas) {
+		super(nome, preco);
+		this.numFaixas = numFaixas;
+	}
+	
+	public int getNumFaixas() {
+		return numFaixas;
+	}
+	
+	public String toString() {
+		return super.toString() + " - " + numFaixas + "faixas";
+	}
+}
+
+
+class DVD extends Produto {
+	private int duracao;
+	
+	public DVD (String nome, double preco, int duracao) {
+		super(nome, preco);
+		this.duracao = duracao;
+	}
+	
+	public int getDuracao() {
+		return duracao;
+	}
+	
+	public String toString() {
+		return super.toString() + " - " + duracao + " minutos";
+	}
+}
+
+
+class Livro extends Produto {
+	private String autor;
+	
+	public Livro(String nome, double preco, String autor) {
+		super(nome, preco);
+		this.autor = autor;
+	}
+	
+	public String getAutor() {
+		return autor;
+	}
+	
+	public String toString() {
+		return super.toString() + " - " + autor;
+	}
+
+}
+
+class Loja {
+	public static void main(String [] args) {
+		
+		Produto[] produtos = new Produto[5];
+		produtos[0] = new Livro("E Assim Que Comeca", 29.90, "Coolen Hover");
+        produtos[1] = new Livro("E Assim que Acaba", 19.90, "Coolen Hover");
+        produtos[2] = new CD("Thinking Out Loud", 39.90, 12);
+        produtos[3] = new DVD("Matrix", 49.90, 154);
+        produtos[4] = new DVD("Hora de Ponta 2", 29.90, 125);
+        
+        for(Produto p: produtos) {
+        	System.out.println(p);
+        }
+	}
+}
+
+
+
+
+
+
+
+/* Na classe Produto definimos os atributos nome e preco e implementamos os métodos getNome(), 
+ * getPreco() e toString(). Na classe Livro adicionamos o atributo autor e sobrescrevemos o método 
+ * toString() para incluir o autor. Na classe CD adicionamos o atributo numFaixas e sobrescrevemos o 
+ * método toString() para incluir o número de faixas. Na classe DVD adicionamos o atributo duracao e 
+ * sobrescrevemos o método toString() para incluir a duração em minutos. Na classe Loja criamos um array 
+ * de Produtos, adicionamos 5 produtos diferentes
+ */
