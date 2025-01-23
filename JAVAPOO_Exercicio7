@@ -1,0 +1,80 @@
+package JAVAPOO_Exercicio7;
+
+class Ventilador {
+
+	private final int BAIXA = 1;
+	private final int MEDIA = 2;
+	private final int RAPIDA = 3;
+	
+	private int velocidade;
+	private boolean ligado;
+	private String cor;
+	
+	public Ventilador() {
+		velocidade = BAIXA;
+		ligado = false;
+		cor = "Branco";
+	}
+	
+	
+	public int getVelocidade() {
+		return velocidade;
+	}
+	
+	
+	public void setVelocidade(int velocidade) {
+		this.velocidade = velocidade;
+	}
+	
+	
+	public boolean isLigado() {
+		return ligado;
+	}
+	
+	
+	public void setLigado(boolean ligado) {
+		this.ligado = ligado;
+	}
+	
+	
+	public String getCor() {
+		return cor;
+	}
+	
+	
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+	
+	
+	public String toString() {
+		  return "Cor: " + cor + "\nVelocidade: " + velocidade + "\nLigado: " + ligado;
+	}
+	
+}
+
+
+class TesteVentilador {
+
+	public static void main(String [] args) {
+		
+        Ventilador ventilador1 = new Ventilador();
+        Ventilador ventilador2 = new Ventilador();
+        
+        ventilador1.setCor("Azul");
+        ventilador1.setVelocidade(2);
+        ventilador1.setLigado(true);
+        
+        ventilador2.setCor("Verde");
+        ventilador2.setVelocidade(3);
+        ventilador2.setLigado(false);
+        
+        //Impressao de mensagens 
+        System.out.println("Ventilador 1:\n" + ventilador1.toString());
+        System.out.println("\nVentilador 2:\n" + ventilador2.toString());
+        
+        
+    }
+		
+}
+
