@@ -1,0 +1,397 @@
+package Exame2021_2EpocaExercicio6;
+
+import java.util.Vector;
+import java.util.Date;
+
+//Declaracao da claase publica ControloRemoto
+class ControleRemoto {
+	
+	//Declaracao de variaveis 
+    private Televisao televisao;
+    
+    //Metodo contrutor da classe ContoleRemoto
+    public ControleRemoto(Televisao televisao) {
+        this.televisao = televisao; //Atribuindo o valor do parametro televisao ao atributo televisao 
+    }
+
+    //Metodo para aumentar o volume da televisao em uma unidade 
+    public void aumentarVolume() {
+        televisao.aumentarVolume();
+    }
+
+    //Metodo para diminuir o volume da televisao em uma unidade
+    public void diminuirVolume() {
+        televisao.diminuirVolume();
+    }
+
+    //Metodo para aumentar de canal em uma unidade
+    public void aumentarCanal() {
+        televisao.aumentarCanal();
+    }
+
+    //Metodo para diminuir de canal em uma unidade 
+    public void diminuirCanal() {
+        televisao.diminuirCanal();
+    }
+
+    //Metodo para trocar de canal
+    public void trocarCanal(int novoCanal) {
+        televisao.trocarCanal(novoCanal);
+    }
+
+    //Metodo para consultar status
+    public void consultarStatus() {
+        int canal = televisao.getCanal();
+        int volume = televisao.getVolume();
+        System.out.println("Canal: " + canal);
+        System.out.println("Volume: " + volume);
+    }
+}
+
+
+//Declaracao da classe publica Televisao 
+class Televisao {
+	
+	//Declaracao de variaveis 
+    private int canal;
+    private int volume;
+
+    //Instanciacao das variaveis canal e volume 
+    public Televisao() {
+        canal = 1;
+        volume = 50;
+    }
+
+    //Metodos Getters & Setters 
+    public int getCanal() {
+        return canal;
+    }
+
+    public void setCanal(int canal) {
+        this.canal = canal;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public void aumentarVolume() {
+        if (volume < 100) {
+            volume++;
+        }
+    }
+
+    public void diminuirVolume() {
+        if (volume > 0) {
+            volume--;
+        }
+    }
+
+    public void aumentarCanal() {
+        canal++;
+    }
+
+    public void diminuirCanal() {
+        if (canal > 1) {
+            canal--;
+        }
+    }
+
+    public void trocarCanal(int novoCanal) {
+        if (novoCanal >= 1) {
+            canal = novoCanal;
+        }
+    }
+}
+
+//Interface que define as operacoes da agenda de contatos
+interface Operacoes {
+	
+	//Atributos 
+ void adicionar(Contacto c, Vector<Contacto> v);
+ void remover(Contacto c, Vector<Contacto> v);
+ Vector<Contacto> pesquisar(Vector<Contacto> v, int nrTelemovel);
+ void pesquisar(Vector<Contacto> v, String nome);
+ String getIdadesContactosSingulares(Vector<Contacto> v);
+ void unirContactos(Vector<Contacto> v, Contacto c1, Contacto c2);
+ 
+}
+
+
+
+//Classe que implementa as operacoes da agenda de contatos
+class AgendaContactoos implements Operacoes {
+	
+//Metodo para adicionar um contacto ao vector 
+public void adicionar(Contacto c, Vector<Contacto> v) {
+   v.add(c); //Adicionado o contacto c ao vector c
+}
+
+//Metodo para remover um contacto no interior do vector 
+public void remover(Contacto c, Vector<Contacto> v) {
+   v.remove(c); //Removendo o contacto c do vector v
+}
+
+//Metodo para pesquisar o contacto e o numero de telemovel nno interior do vector 
+public Vector<Contacto> pesquisar(Vector<Contacto> v, int nrTelemovel) {
+   Vector<Contacto> resultados = new Vector<>();
+   for (Contacto c : v) {
+       if (c.numeroTelemovel.equals(Integer.toString(nrTelemovel))) {
+           resultados.add(c);
+       }
+   }
+   return resultados;
+}
+
+//Metodo para pesquisar pelo contacto e pelo nome no interior do Vector
+public void pesquisar(Vector<Contacto> v, String nome) {
+   for (Contacto c : v) {
+       if (c.nome.equals(nome)) {
+           System.out.println(c.toString());
+       }
+   }
+}
+
+//Metodo para obter as idades dos contactos singulares 
+public String getIdadesContactosSingulares(Vector<Contacto> v) {
+   StringBuilder sb = new StringBuilder();
+   for (Contacto c : v) {
+       if (c instanceof ContactoSingular) {
+           ContactoSingular cs = (ContactoSingular) c; //CS = Contacto Singular
+           sb.append("Nome: ").append(cs.nome).append(", Numero de Telemovel: ").append(cs.numeroTelemovel);
+           // Cálculo da idade atual
+           // ...
+           sb.append(", Idade: ").append("21").append("\n");
+       }
+   }
+   return sb.toString();
+}
+
+//Metodo para unir contactos 
+public void unirContactos(Vector<Contacto> v, Contacto c1, Contacto c2) {
+   c1.adicionarContactoAssociado(c2);
+   v.remove(c2); //Removendo o contacto c2 do vector v
+}
+
+}
+
+
+//Declaracao da classe publica AgendaDeContactos 
+class AgendaDeContactos {
+	
+		//Declaracao do metodo principal
+	    public static void main(String[] args) {
+	        Vector<Contacto> agenda = new Vector<>();
+	        AgendaContactoos agendaContactos = new AgendaContactoos();
+
+	        //Exemplo de criacao de contatos
+	        Contacto c1 = new ContactoSingular("Mirchen", "Rua A", "862734797", "846948154", new Date());
+	        Contacto c2 = new ContactoSingular("Miguel", "Rua B", "824669330", "828219235", new Date());
+	        Contacto c3 = new EntidadeColetiva("Empresa XYZ", "Rua C", 2000, "Tecnologia", "555555555", "666666666");
+
+	        //Exemplo de utilizacao dos metodos da agenda de contatos
+	        agendaContactos.adicionar(c1, agenda);
+	        agendaContactos.adicionar(c2, agenda);
+	        agendaContactos.adicionar(c3, agenda);
+
+	        agendaContactos.pesquisar(agenda, "Mirchen");
+	        Vector<Contacto> resultados = agendaContactos.pesquisar(agenda, 123456789);
+	        for (Contacto c : resultados) {
+	            System.out.println(c.toString());
+	        }
+
+	        String idades = agendaContactos.getIdadesContactosSingulares(agenda);
+	        System.out.println(idades);
+
+	        agendaContactos.unirContactos(agenda, c1, c2);
+
+	    }
+}
+
+
+//Classe abstrata para representar um contato
+abstract class Contacto {
+
+     //Declaracao de variaveis 
+     protected String nome;
+     protected String endereco;
+     protected String numeroDocumento;
+     protected String numeroTelemovel;
+     protected Vector<Contacto> contactosAssociados;
+
+ 
+     //Metodo construtor Contacto com os parametros nome; endereco; numeroDocumento; numeroTelemovel 
+     public Contacto(String nome, String endereco, String numeroDocumento, String numeroTelemovel) {
+         this.nome = nome; //Atribuindo o valor do parametro "nome" ao atributo "nome"
+         this.endereco = endereco; //Atribuindo o valor do parametro "endereco" ao atributo "endereco"
+         this.numeroDocumento = numeroDocumento; //Atribuindo o valor do parametro "numeroDocumento" ao atributo "numeroDocumento"
+         this.numeroTelemovel = numeroTelemovel; //Atribuindo o valor do parametro "numeroTelemovel" ao atributo "numeroTelemovel"
+         this.contactosAssociados = new Vector<>(); //Cria um novo objeto "Vector" vazio e o atribui ao atributo "contactosAssociados"
+     }
+
+     public abstract String getInfoAdicional();
+
+     //Metodo para adicionar contactos associados 
+     public void adicionarContactoAssociado(Contacto contacto) {
+         contactosAssociados.add(contacto);
+     }
+
+     //Metodo para remover contactos associados 
+     public void removerContactoAssociado(Contacto contacto) {
+         contactosAssociados.remove(contacto);
+     }
+
+     // Getters & Setters
+     public String getNome() {
+         return nome;
+     }
+
+     public void setNome(String nome) {
+         this.nome = nome;
+     }
+
+     public String getEndereco() {
+         return endereco;
+     }
+
+     public void setEndereco(String endereco) {
+         this.endereco = endereco;
+     }
+
+     public String getNumeroDocumento() {
+         return numeroDocumento;
+     }
+
+     public void setNumeroDocumento(String numeroDocumento) {
+         this.numeroDocumento = numeroDocumento;
+     }
+
+     public String getNumeroTelemovel() {
+         return numeroTelemovel;
+     }
+
+     public void setNumeroTelemovel(String numeroTelemovel) {
+         this.numeroTelemovel = numeroTelemovel;
+     }
+
+     public Vector<Contacto> getContactosAssociados() {
+         return contactosAssociados;
+     }
+
+     public void setContactosAssociados(Vector<Contacto> contactosAssociados) {
+         this.contactosAssociados = contactosAssociados;
+     }
+}
+
+
+//Classe que representa um contato singular
+class ContactoSingular extends Contacto {
+
+	//Declaracao de variaveis 
+    private Date dataNascimento;
+
+    //Metodo construtor ContactoSingular com os parametros nome, endereco, numeroDocumento, numeroTelemovel, dataNascimento
+    public ContactoSingular(String nome, String endereco, String numeroDocumento, String numeroTelemovel, Date dataNascimento) {
+        super(nome, endereco, numeroDocumento, numeroTelemovel);
+        this.dataNascimento = dataNascimento; //Atribuindo o valor do parametro "dataNascimento" ao atributo "dataNascimento"
+    }
+
+    //Metodo para fornecer informacao adicional 
+    public String getInfoAdicional() {
+        return "Data de Nascimento: " + dataNascimento.toString();
+    }
+}
+
+
+//Classe que representa uma entidade coletiva
+class EntidadeColetiva extends Contacto {
+	
+	//Declaracao de variaveis 
+     private int anoConstituicao;
+     private String areaAtuacao;
+     //private String numeroTelemovelComercial;
+
+     //Metodo construtor EntidadeColetiva com os parametros nome, enderecco, anoConstituicao, areaAtuacao, numerotelemove, numeroTelemovelComercial
+     public EntidadeColetiva(String nome, String endereco, int anoConstituicao, String areaAtuacao, String numeroTelemovel, String numeroTelemovelComercial) {
+         super(nome, endereco, null, numeroTelemovel);
+         this.anoConstituicao = anoConstituicao; //Atribuindo o valor do parametro "anoConstituicao" ao atributo "anoConstituicao"
+         this.areaAtuacao = areaAtuacao; //Atribuindo o valor do parametro "areaAtuacao" ao atributo "areaAtuacao"
+         //this.numeroTelemovelComercial = numeroTelemovelComercial;
+     }
+
+     //Metodo para ter informacao adicional
+     public String getInfoAdicional() {
+         return "Ano de Constituicao: " + anoConstituicao + ", Area de Atuacao: " + areaAtuacao;
+     }
+}
+
+
+//Declarando o metodo Main publico
+class Main {
+	
+	//Declaracao do metodo principal
+    public static void main(String[] args) {
+    	
+        Televisao televisao = new Televisao(); //Criando um novo objecto do tipo Televisao e atribuindo-o a variavel televisao 
+        ControleRemoto controleRemoto = new ControleRemoto(televisao); //Criando um novo objecto do tipo ControleRemoto e atribuindo-o a variavel controleRemoto 
+
+        Scanner numero = new Scanner(System.in); //Criando um objecto do tipo Scanner com o nome numero  
+        int opcao; //Declaracao da variavel opcao 
+
+        do {
+        	System.out.println("\n-----------------------MENU---------------------\t"); //Menu de opcoes 
+            System.out.println("Escolha uma opcao:"); //Pedindo ao usuario para escolher uma opcao
+            System.out.println("1 - Aumentar o Volume"); //Aumentar o volume do som da televisao
+            System.out.println("2 - Diminuir o Volume"); //Diminuir o volume do som da televisao
+            System.out.println("3 - Aumentar o Canal"); //Aumentar o canal da televisao em uma unidade 
+            System.out.println("4 - Diminuir o Canal"); //Diminuir o canal da televisao em uma unidade
+            System.out.println("5 - Trocar de Canal"); //Trocar de canal
+            System.out.println("6 - Consultar Status"); //Consulta de status 
+            System.out.println("0 - Sair"); //Sair do programa
+            opcao = numero.nextInt(); //Variavel recebendo um parametro via teclado
+
+            //Casos possiveis 
+            switch (opcao) {
+                case 1: //Primeiro caso: Aumentar o volume de som da televisao em uma unidade de cada vez 
+                    controleRemoto.aumentarVolume();
+                    break; //Encerramento do primeiro caso 
+                    
+                case 2: //Segundo caso: Diminuir o volume de som da televisao em uma unidade de cada vez
+                    controleRemoto.diminuirVolume();
+                    break; //Encerramento do segundo caso 
+                    
+                case 3: //Terceiro caso: Aumentar o numero do canal em uma unidade
+                    controleRemoto.aumentarCanal();
+                    break; //Encerramento do terceiro caso
+                    
+                case 4: //Quarto caso: Diminuir o numero do canal em uma unidade 
+                    controleRemoto.diminuirCanal();
+                    break; //Encerramento do quarto caso
+                    
+                case 5: //Quinto caso:  Troca de canal 
+                    System.out.println("Insira um novo canal:"); //Pedindo ao usuario para inserir um novo canal 
+                    int novoCanal = numero.nextInt();
+                    controleRemoto.trocarCanal(novoCanal);
+                    break; //Encerramento do quinto caso
+                    
+                case 6: //Sexto caso: Consulta de status 
+                    controleRemoto.consultarStatus();
+                    break; //Encerramento do sexto caso
+                    
+                case 0: //Caso 0: Sair
+                    System.out.println("Encerrando o programa..."); //Mensagem na tela mostrando o encerrando da operacao
+                    break; //Encerramento do ultimo caso 
+                    
+                default:
+                    System.out.println("Opcao invalida! Por favor, tente novamente."); //Mensagem na tela informando ao usuario que a opcao escolhida foi e invalida e pedindo para que ele tente novamnete 
+                    break;
+            }
+        } while (opcao != 0); //Loop vazio que ai repetir o Menu de Opcoes ate que se insira 0 para sair do programa 
+
+        numero.close(); //Indicando que nao vamos mais ler entradas do teclado e que podemos liberar os recursos associados
+    }
+}
