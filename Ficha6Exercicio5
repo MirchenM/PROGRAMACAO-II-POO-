@@ -1,0 +1,87 @@
+package Ficha6Exercicio5;
+
+//Importando a classe Scanner do pacote java.util
+import java.util.Scanner;
+
+//Declarando a classe publica Rectangulo
+class Rectangulo {
+	
+	//Atributos
+    private double largura;
+    private double altura;
+    private String cor;
+
+    
+    public Rectangulo() {
+        this.largura = 1.0; //Atribui o valor fornecido como parametro "largura" ao atributo "1.0" da propria instancia da classe "Rectangulo"
+        this.altura = 1.0; //Atribui o valor fornecido como parametro "altura" ao atributo "1.0" da propria instancia da classe "Rectangulo"
+        this.cor = "branco"; //Atribui o valor fornecido como parametro "cor" ao atributo "branco" da propria instancia da classe "Rectangulo"
+    }
+
+  //Metodo construtor para a classe rectangulo com os parametros largura, altura, cor
+    public Rectangulo(double largura, double altura) {
+        this.largura = largura; //Atribui o valor fornecido como parametro "largura" ao atributo "largura" da propria instancia da classe "Rectangulo"
+        this.altura = altura; //Atribui o valor fornecido como parametro "altura" ao atributo "altura" da propria instancia da classe "Rectangulo"
+        this.cor = "branco"; //Atribui o valor fornecido como parametro "cor" ao atributo "branco" da propria instancia da classe "Rectangulo"
+    }
+
+    //Metodos Getters & Setters
+    public double getLargura() {
+        return largura;
+    }
+
+    public void setLargura(double largura) {
+        this.largura = largura;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public double getArea() {
+        return largura * altura;
+    }
+
+    public double getPerimetro() {
+        return 2 * (largura + altura);
+    }
+}
+
+
+
+//Declarando a classe publica Principal
+class Principal {
+
+	//Declarando o metodo principal
+	public static void main(String[] args) {
+        Scanner lerDado = new Scanner(System.in);
+
+        System.out.print("Insira o valor da largura do rectangulo: "); //Pedindo ao usuario para inserir o valor da largura do rectangulo
+        double largura = lerDado.nextDouble();
+
+        System.out.print("Insira o valor da altura do rectangulo: "); //Pedindo ao usuario para inserir o valor da altura do rectangulo
+        double altura = lerDado.nextDouble();
+        Rectangulo retangulo = new Rectangulo(largura, altura);
+        
+        //Impressao de mensagens 
+        System.out.println("Largura: " + retangulo.getLargura());
+        System.out.println("Altura: " + retangulo.getAltura());
+        System.out.println("Cor: " + retangulo.getCor());
+        System.out.println("Area: " + retangulo.getArea());
+        System.out.println("Perimetro: " + retangulo.getPerimetro());
+   
+        lerDado.close(); //Fechando a instancia Scanner 
+	}
+}
