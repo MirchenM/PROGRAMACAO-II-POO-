@@ -1,0 +1,82 @@
+package Ficha6Exercicio8;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner; 
+
+class Principal {
+	public static void main(String[] args) {
+        ContaBancaria conta = new ContaBancaria();
+
+        System.out.println("Conta criada em: " + conta.getDataAberturaFormatada());
+        System.out.println("Saldo actual: " + conta.getSaldoFormatado());
+
+        Scanner lerDado = new Scanner(System.in);
+
+        System.out.print("Insira o valor a depositar: ");
+        double valorDeposito = lerDado.nextDouble();
+        conta.depositar(valorDeposito);
+
+        System.out.print("Insira o valor a levantar: ");
+        double valorLevantamento = lerDado.nextDouble();
+        conta.levantar(valorLevantamento);
+
+        System.out.println("Saldo actual: " + conta.getSaldoFormatado());
+
+        lerDado.close();
+    }
+}
+
+
+//Declarando uma classe publica ContaBancaria
+class ContaBancaria {
+	//Atributos
+    private double saldo;
+    private final Date dataAbertura;
+
+    public ContaBancaria() {
+        this.saldo = 0.0;
+        this.dataAbertura = new Date();
+    }
+
+    //Metodos Getters & Setters
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public String getDataAberturaFormatada() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(dataAbertura);
+    }
+
+    public String getSaldoFormatado() {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return "MT " + df.format(saldo);
+    }
+
+    //Metodo para depositar dinheiro
+    public void depositar(double valor) {
+        saldo += valor;
+        System.out.println("Deposito efectuado com sucesso: MZN " + valor);
+    }
+
+    //Metodo para levantar dinheiro
+    public void levantar(double valor) {
+        if (saldo >= valor) {
+            saldo -= valor;
+            System.out.println("Levantamento efectuado com sucesso: MT " + valor);
+        } else {
+            System.out.println("Saldo insuficiente para levantamento!");
+        }
+    }
+}
+
