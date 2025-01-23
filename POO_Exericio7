@@ -1,0 +1,37 @@
+/*
+ * Este e um programa em Java que, inserido um nome qualquer ele vai identificar as letras do nome que se encontram em posicoes
+ *  impares e depois vais imprimir na tela.
+ * 
+ * */
+ 
+
+//Pacote 
+package POO_Exericio7;
+
+//Importando a classe Scanner 
+import java.util.Scanner;
+
+//Classe 
+public class Ex07 {
+	
+	//Classe Scanner publica e estatica 
+	public static Scanner ler = new Scanner(System.in);
+	
+	//Metodo principal
+	public static void main(String[] args) {
+		
+		//Pedindo ao usuario para inserir um nome a sua escolha 
+		System.out.println(" Digite seu nome: ");
+		
+		//Imprimindo o nome na tela 
+		String nome = ler.nextLine();
+		
+		//Ciclo "for" para impimir na tela as letras que se encontram em posicoes impares do nome inserido pelo usuario 
+		for(int i = 1; i <= nome.length(); i++) {
+			if(i % 2 != 0) {
+				System.out.print(nome.charAt(i-1));				
+			}			
+		}		
+	}
+
+}
