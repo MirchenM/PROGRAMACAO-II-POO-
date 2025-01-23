@@ -1,0 +1,105 @@
+package Ficha6Exercicio7;
+
+//Importando a classe Scanner do pacote java.util
+import java.util.Scanner;
+
+//Declarando uma classe publica Ventilador
+class Ventilador {
+	
+	//Atributos
+    private static final int BAIXA = 1;
+    private static final int MEDIA = 2;
+    private static final int RAPIDA = 3;
+    private int velocidade;
+    private boolean ligado;
+    private String cor;
+
+    public Ventilador() {
+        this.velocidade = BAIXA;
+        this.ligado = false;
+        this.cor = "branco";
+    }
+
+    
+    //Metodos Getters & Setters
+    public int getVelocidade() {
+        return velocidade;
+    }
+
+    public void setVelocidade(int velocidade) {
+        if (velocidade >= BAIXA && velocidade <= RAPIDA) {
+            this.velocidade = velocidade;
+        } else {
+            System.out.println("Velocidade invalida!");
+        }
+    }
+
+    public boolean isLigado() {
+        return ligado;
+    }
+
+    public void setLigado(boolean ligado) {
+        this.ligado = ligado;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    @Override
+    public String toString() {
+        String status = ligado ? "ligado" : "desligado";
+        return "Ventilador [cor = " + cor + ", velocidade = " + velocidade + ", estado = " + status + "]";
+    }
+}
+
+
+
+//Declarando a classe publica Principal
+class Principal {
+	//Declarando o metodo principal
+	public static void main(String[] args) {
+		Scanner lerDado = new Scanner(System.in);
+
+		Ventilador ventilador1 = new Ventilador(); //Criando o ventilador 1 
+
+		System.out.print("Informe a cor do ventilador 1: "); //Pedindo ao usuario para informar a cor do ventilador 1
+		String cor1 = lerDado.nextLine();
+		ventilador1.setCor(cor1);
+		
+		System.out.print("Escolha a velocidade do ventilador 1 (1 - Baixa, 2 - Media, 3 - Rapida): "); //Pedindo ao usuario para que ele escolha a velocidade do ventilador 1
+		int velocidade1 = lerDado.nextInt();
+		ventilador1.setVelocidade(velocidade1);
+
+		System.out.print("O ventilador 1 esta ligado? (true/false): "); //Testando se o ventilador 1 esta ou nao ligado
+		boolean ligado1 = lerDado.nextBoolean();
+		ventilador1.setLigado(ligado1);
+
+		Ventilador ventilador2 = new Ventilador(); //Criando o ventilador 2
+
+		System.out.print("Informe a cor do ventilador 2: "); //Pedindo ao usuario para informar a cor do ventilador 2
+		String cor2 = lerDado.nextLine(); // Consumir a nova linha pendente
+		cor2 = lerDado.nextLine();
+		ventilador2.setCor(cor2);
+
+		System.out.print("Escolha a velocidade do ventilador 2 (1 - Baixa, 2 - Media, 3 - Rapida): "); //Pedindo ao usuario para que ele escolha a velocidade do ventilador 2
+		int velocidade2 = lerDado.nextInt();
+		ventilador2.setVelocidade(velocidade2);
+
+		System.out.print("O ventilador 2 esta ligado? (true/false): "); //Testando se o ventilador 2 esta ou nao ligado
+		boolean ligado2 = lerDado.nextBoolean();
+		ventilador2.setLigado(ligado2);
+
+		//Impressao de informacao sobre o ventilador 1
+		System.out.println(ventilador1.toString());
+
+		//Impresao de informacao sobre o ventilador 2
+		System.out.println(ventilador2.toString());
+    
+		lerDado.close(); //Encerrando a instancia da classe Scanner
+	}
+}
