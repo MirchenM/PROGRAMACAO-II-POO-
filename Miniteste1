@@ -1,0 +1,187 @@
+package Miniteste1;
+
+//Importando a classe Scanner do pacote java.util
+import java.util.Scanner;
+
+//Declaracao da classe publica Pessoa
+public class Pessoa {
+	
+	//Declaracao de variaveis 
+    private int BI;
+    private String nome;
+    private int idade;
+    private String sexo;
+
+    //Metodo construtor da classe Pessoa com os parametros BI, nome, idade e sexo
+    public Pessoa(int BI, String nome, int idade, String sexo) {
+        this.BI = BI; //Atribuindo o valor do parametro BI ao atributo BI
+        this.nome = nome; //Atribuindo o valor do parametro nome ao atributo nome
+        this.idade = idade; //Atribuindo o valor do parametro idade ao atributo idade
+        this.sexo = sexo; //Atribuindo o valor do parametro sexo ao atributo sexo
+    }
+
+    //Metodos Getters & Setters
+    public int getBI() {
+        return BI; 
+    }
+
+    public void setBI(int BI) {
+        this.BI = BI;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    //Metodo para imprimir todos os atributos do objecto Pessoa
+    public void imprimirDados() {
+    	System.out.println("\n-----IMPRESSAO DOS DADOS-----\t");
+        System.out.println("BI: " + BI); //Impressao do numero do BI da pessoa
+        System.out.println("Nome: " + nome); //Impressao do nome da pessoa 
+        System.out.println("Idade: " + idade); //Impressao da idade da pessoa
+        System.out.println("Sexo: " + sexo); //Impressao do sexo da pessoa 
+    }
+    
+    //Metodo para atualizar o nome colocando em letras maiusculas
+    public void atualizarNomeMaiusculas() {
+        this.nome = nome.toUpperCase(); //Atribuindo o valor do parametro nome ao atributo nome e colocando-o em letras maiusculas
+    }
+
+    //Metodo para atualizar o nome removendo espaços em branco no inicio e no fim
+    public void atualizarNomeSemEspacos() {
+        this.nome = nome.trim(); //Atribuindo o valor do parametro nome ao atributo nome e removendo os espacos em branco no inicio e no fim
+    }
+    
+}
+
+
+
+//Declaracaao da classe publica Executa
+class Executa {
+	
+	//Declaracao do metodo principal
+    public static void main(String[] args) {
+    	
+    	//Criando um objecto Scanner chamado valor que sera usado para ler dados inseridos via teclado 
+        Scanner valor = new Scanner(System.in); 
+
+        //Criacao dos objetos da classe Pessoa
+        System.out.println("Insira os dados da Pessoa 1:"); //Inserindo os dados da Pessoa 1
+        Pessoa pessoa1 = criarPessoa(valor); //Criando a Pessoa 1
+
+        System.out.println("Insira os dados da Pessoa 2:"); //Inserindo os dados da Pessoa 2
+        Pessoa pessoa2 = criarPessoa(valor); //Criando a Pessoa 2
+
+        System.out.println("Insira os dados da Pessoa 3:"); //Inserindo os dados da Pessoa 3
+        Pessoa pessoa3 = criarPessoa(valor); //Criando a Pessoa 3
+
+        System.out.println("Insira os dados da Pessoa 4:");  //Inserindo os dados da Pessoa 4
+        Pessoa pessoa4 = criarPessoa(valor); //Criando a Pessoa 4
+        
+        System.out.println("Insira os dados da Pessoa 5:"); //Inserindo os dados da Pessoa 5
+        Pessoa pessoa5 = criarPessoa(valor); //Criando a Pessoa 5
+
+        valor.close(); //Encerrando a recepcao de dados via teclado 
+
+        //Impressao dos atributos dos objetos
+        System.out.println("Dados da Pessoa 1:"); //Impressao dos dados da Pessoa 1
+        pessoa1.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados
+
+        System.out.println("Dados da Pessoa 2:"); //Impressao dos dados da Pessoa 2
+        pessoa2.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados
+
+        System.out.println("Dados da Pessoa 3:"); //Impressao dos dados da Pessoa 3
+        pessoa3.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados
+
+        System.out.println("Dados da Pessoa 4:"); //Impressao dos dados da Pessoa 4
+        pessoa4.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados
+        
+        System.out.println("Dados da Pessoa 5:"); //Impressao dos dados da Pessoa 5
+        pessoa5.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados
+
+        //Atualizacao do nome para letras maiusculas
+        pessoa1.atualizarNomeMaiusculas();
+        pessoa2.atualizarNomeMaiusculas();
+        pessoa3.atualizarNomeMaiusculas();
+        pessoa4.atualizarNomeMaiusculas();
+        pessoa5.atualizarNomeMaiusculas();
+
+        //Atualizacao do nome removendo espaços em branco no inicio e no fim
+        pessoa1.atualizarNomeSemEspacos();
+        pessoa2.atualizarNomeSemEspacos();
+        pessoa3.atualizarNomeSemEspacos();
+        pessoa4.atualizarNomeSemEspacos();
+        pessoa5.atualizarNomeSemEspacos();
+
+        //Impressao dos atributos actualizados
+        System.out.println("Dados actualizados da Pessoa 1:"); //Impressao dos dados actualizados da Pessoa 1
+        pessoa1.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados atualizados
+
+        System.out.println("Dados actualizados da Pessoa 2:"); //Impressao dos dados actualizados da Pessoa 2
+        pessoa2.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados atualizados
+
+        System.out.println("Dados actualizados da Pessoa 3:"); //Impressao dos dados actualizados da Pessoa 3
+        pessoa3.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados atualizados
+
+        System.out.println("Dados actualizados da Pessoa 4:"); //Impressao dos dadps actualizados da Pessoa 4
+        pessoa4.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados atualizados
+        
+        System.out.println("Dados actualizados da Pessoa 5:"); //Impressao dos dados actualizados da Pessoa 5
+        pessoa5.imprimirDados(); //Chamando o metodo impimirDados()
+        System.out.println(); //Imprimindo os dados atualizados
+        
+    }
+
+    //Metodo para criar um objeto Pessoa com os dados inseridos pelo usuario
+    private static Pessoa criarPessoa(Scanner lerValor) {    	
+        System.out.print("BI: "); //BI
+        int bi = lerValor.nextInt();
+        
+        lerValor.nextLine(); //Criando espacamento 
+
+        System.out.print("Nome: "); //Nome
+        String nome = lerValor.nextLine();
+
+        System.out.print("Idade: "); //Idade
+        int idade = lerValor.nextInt();
+        
+        lerValor.nextLine(); //Criando espacamento 
+
+        System.out.print("Sexo: "); //Sexo
+        String sexo = lerValor.nextLine();
+
+        System.out.println(); //Impressao dos dados inseridos pelo usuario
+
+        return new Pessoa(bi, nome, idade, sexo);
+    }
+    
+}
