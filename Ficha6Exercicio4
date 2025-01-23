@@ -1,0 +1,64 @@
+package Ficha6Exercicio4;
+
+//Importando a classe Scanner do pacote java.util 
+import java.util.Scanner;
+
+//Declarando uma classe publica Pessoa
+class Pessoa {
+	
+	//Atributos
+    private String nome;
+    private int idade;
+    private double altura;
+
+    
+    //Metodos Getters & Setters
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    //Declarando o metodo principal
+    public static void main(String[] args) {
+        Scanner lerDado = new Scanner(System.in);
+        Pessoa pessoa = new Pessoa();
+
+        System.out.print("Informe o nome: "); //Pedindo ao usuario para informar o nome
+        String nome = lerDado.nextLine();
+        pessoa.setNome(nome);
+
+        System.out.print("Informe a idade: "); //Pedindo ao usuario para informar a idade
+        int idade = lerDado.nextInt();
+        pessoa.setIdade(idade);
+
+        System.out.print("Informe a altura: "); //Pedindo ao usuario para informar a altura 
+        double altura = lerDado.nextDouble();
+        pessoa.setAltura(altura);
+
+        //Impressao dos valores dos atributos
+        System.out.println("Nome: " + pessoa.getNome());
+        System.out.println("Idade: " + pessoa.getIdade());
+        System.out.println("Altura: " + pessoa.getAltura());
+        
+        lerDado.close();
+    }
+}
