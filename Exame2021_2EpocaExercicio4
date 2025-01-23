@@ -1,0 +1,55 @@
+package Exame2021_2EpocaExercicio4;
+
+import java.util.Scanner; 
+import java.util.Vector;
+
+//Declarando um metodo publico CaixaDeValores 
+class CaixaDeValores {
+	//Declaracao de variaveis 
+    public Vector<Integer> caixinhas;
+    //Metodo construtor para a classe CaixaDeValores
+    public CaixaDeValores() {
+        caixinhas = new Vector<>(800); //Criando um novo vector caixinhas do tipo Vector<Integer> com a capacidade inicial de 800 elementos e atribui esse vector a variavel caixinhas da classe CaixaDeValores
+    }
+
+    //Metodo para adicionar numeros pares 
+    public void adicionarNumerosPares() {
+        for (int i = 2; i <= 1600; i += 2) {
+            caixinhas.add(i); //Adiciona o valor i ao vetor caixinhas do tipo Vector<Integer>
+        }
+    }
+
+    //Declaracao do metodo public toString que vai retornar um valor do tipo String
+    @Override
+    public String toString() {
+        StringBuilder sB = new StringBuilder(); //Cria um novo objeto StringBuilder vazio e o associa a variavel sb
+        for (int i = 0; i < caixinhas.size(); i++) {
+            sB.append("Caixa ").append(i + 1).append(": ").append(caixinhas.get(i)).append("\n"); //Constroi uma string que contém informações sobre o numero da caixa e o valor armazenado nessa caixa
+        }
+        return sB.toString(); //Retorna a representacao da sequencia de caracteres construida pelo objeto StringBuilder como uma string
+    }
+}
+
+
+//Declarando o metodo publico Main
+class Main{ 
+	
+//Declaracao do metodo principal
+public static void main(String[] args) {
+    CaixaDeValores caixas = new CaixaDeValores(); //Criando um novo objecto do tipo CaixaDeValores e tribuindo-o a a variavel CaixaDeValores
+    caixas.adicionarNumerosPares(); //Chama o metodo adicionarNumerosPares() no objecto caixas
+
+    System.out.println("Caixas de Valores"); //Impressao da mensagem na tela mostrando 
+    System.out.println("Insira o numero maximo para preencher as caixas:"); //Pedindo ao usuario para inserir o numero maximo para preencher as caixas
+    Scanner numeroCaixas = new Scanner(System.in); //Criando um objecto do tipo Scanner com o nome numeroCaixas
+    int numeroMaximo = numeroCaixas.nextInt(); //Le um numero inteiro inserido pelo usuario atraves do objecto numeroXaixas do tipo Scanner e atribui esse valor a variavel numeroMaximo
+    numeroCaixas.close(); //Indicando que sao serao mais lidos dados inseridos por teclado 
+
+    caixas = new CaixaDeValores(); //Criando um novo objecto do tipo CaixaDeValores e atibui-se a referencia desse valor a variavel caixas 
+    for (int i = 2; i <= numeroMaximo; i += 2) {
+        caixas.caixinhas.add(i); //Adicionando o valor da variavel i a lista caixas 
+    }
+
+    System.out.println(caixas); //imprime na tela a representacao em formato de string do objecto caixas do tipo CaixaDeValores
+}
+}
