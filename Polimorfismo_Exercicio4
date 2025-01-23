@@ -1,0 +1,41 @@
+package Polimorfismo_Exercicio4;
+
+import java.util.ArrayList;
+
+class Zoologico {
+	private ArrayList<Jaula> jaulas = new ArrayList<Jaula>();
+
+    public Zoologico() {
+        for (int i = 0; i < 10; i++) {
+            jaulas.add(new Jaula());
+        }
+    }
+
+    public void adicionarAnimal(int jaula, Animal animal) {
+        jaulas.get(jaula).adicionarAnimal(animal);
+    }
+
+    public void percorrerJaulas() {
+        for (int i = 0; i < jaulas.size(); i++) {
+            Jaula jaula = jaulas.get(i);
+            System.out.println("Jaula " + i + ":");
+            for (Animal animal : jaula.getAnimais()) {
+                System.out.println("- " + animal.getNome() + ": " + animal.emitirSom());
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+class Jaula {
+	private ArrayList<Animal> animais = new ArrayList<Animal>();
+
+    public void adicionarAnimal(Animal animal) {
+        animais.add(animal);
+    }
+
+    public ArrayList<Animal> getAnimais() {
+        return animais;
+    }
+}
