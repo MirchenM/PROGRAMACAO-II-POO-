@@ -1,0 +1,176 @@
+package Exame2021_2EpocaExercicio5;
+
+import java.util.Scanner;
+
+//Declaracao da classe publica Televisao 
+class Televisao {
+	
+	//Declaracao de variaveis 
+    private int canal;
+    private int volume;
+
+    //Instanciacao das variaveis canal e volume 
+    public Televisao() {
+        canal = 1;
+        volume = 50;
+    }
+
+    //Metodos Getters & Setters 
+    public int getCanal() {
+        return canal;
+    }
+
+    public void setCanal(int canal) {
+        this.canal = canal;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public void aumentarVolume() {
+        if (volume < 100) {
+            volume++;
+        }
+    }
+
+    public void diminuirVolume() {
+        if (volume > 0) {
+            volume--;
+        }
+    }
+
+    public void aumentarCanal() {
+        canal++;
+    }
+
+    public void diminuirCanal() {
+        if (canal > 1) {
+            canal--;
+        }
+    }
+
+    public void trocarCanal(int novoCanal) {
+        if (novoCanal >= 1) {
+            canal = novoCanal;
+        }
+    }
+}
+
+
+
+//Declaracao da claase publica ControloRemoto
+class ControleRemoto {
+	
+	//Declaracao de variaveis 
+    private Televisao televisao;
+    
+    //Metodo contrutor da classe ContoleRemoto
+    public ControleRemoto(Televisao televisao) {
+        this.televisao = televisao; //Atribuindo o valor do parametro televisao ao atributo televisao 
+    }
+
+    //Metodo para aumentar o volume da televisao em uma unidade 
+    public void aumentarVolume() {
+        televisao.aumentarVolume();
+    }
+
+    //Metodo para diminuir o volume da televisao em uma unidade
+    public void diminuirVolume() {
+        televisao.diminuirVolume();
+    }
+
+    //Metodo para aumentar de canal em uma unidade
+    public void aumentarCanal() {
+        televisao.aumentarCanal();
+    }
+
+    //Metodo para diminuir de canal em uma unidade 
+    public void diminuirCanal() {
+        televisao.diminuirCanal();
+    }
+
+    //Metodo para trocar de canal
+    public void trocarCanal(int novoCanal) {
+        televisao.trocarCanal(novoCanal);
+    }
+
+    //Metodo para consultar status
+    public void consultarStatus() {
+        int canal = televisao.getCanal();
+        int volume = televisao.getVolume();
+        System.out.println("Canal: " + canal);
+        System.out.println("Volume: " + volume);
+    }
+}
+
+
+//Declarando o metodo Main publico
+class Main {
+	
+	//Declaracao do metodo principal
+    public static void main(String[] args) {
+    	
+        Televisao televisao = new Televisao(); //Criando um novo objecto do tipo Televisao e atribuindo-o a variavel televisao 
+        ControleRemoto controleRemoto = new ControleRemoto(televisao); //Criando um novo objecto do tipo ControleRemoto e atribuindo-o a variavel controleRemoto 
+
+        Scanner numero = new Scanner(System.in); //Criando um objecto do tipo Scanner com o nome numero  
+        int opcao; //Declaracao da variavel opcao 
+
+        do {
+        	System.out.println("\n-----------------------MENU---------------------\t"); //Menu de opcoes 
+            System.out.println("Escolha uma opcao:"); //Pedindo ao usuario para escolher uma opcao
+            System.out.println("1 - Aumentar o Volume"); //Aumentar o volume do som da televisao
+            System.out.println("2 - Diminuir o Volume"); //Diminuir o volume do som da televisao
+            System.out.println("3 - Aumentar o Canal"); //Aumentar o canal da televisao em uma unidade 
+            System.out.println("4 - Diminuir o Canal"); //Diminuir o canal da televisao em uma unidade
+            System.out.println("5 - Trocar de Canal"); //Trocar de canal
+            System.out.println("6 - Consultar Status"); //Consulta de status 
+            System.out.println("0 - Sair"); //Sair do programa
+            opcao = numero.nextInt(); //Variavel recebendo um parametro via teclado
+
+            //Casos possiveis 
+            switch (opcao) {
+                case 1: //Primeiro caso: Aumentar o volume de som da televisao em uma unidade de cada vez 
+                    controleRemoto.aumentarVolume();
+                    break; //Encerramento do primeiro caso 
+                    
+                case 2: //Segundo caso: Diminuir o volume de som da televisao em uma unidade de cada vez
+                    controleRemoto.diminuirVolume();
+                    break; //Encerramento do segundo caso 
+                    
+                case 3: //Terceiro caso: Aumentar o numero do canal em uma unidade
+                    controleRemoto.aumentarCanal();
+                    break; //Encerramento do terceiro caso
+                    
+                case 4: //Quarto caso: Diminuir o numero do canal em uma unidade 
+                    controleRemoto.diminuirCanal();
+                    break; //Encerramento do quarto caso
+                    
+                case 5: //Quinto caso:  Troca de canal 
+                    System.out.println("Insira um novo canal:"); //Pedindo ao usuario para inserir um novo canal 
+                    int novoCanal = numero.nextInt();
+                    controleRemoto.trocarCanal(novoCanal);
+                    break; //Encerramento do quinto caso
+                    
+                case 6: //Sexto caso: Consulta de status 
+                    controleRemoto.consultarStatus();
+                    break; //Encerramento do sexto caso
+                    
+                case 0: //Caso 0: Sair
+                    System.out.println("Encerrando o programa..."); //Mensagem na tela mostrando o encerrando da operacao
+                    break; //Encerramento do ultimo caso 
+                    
+                default:
+                    System.out.println("Opcao invalida! Por favor, tente novamente."); //Mensagem na tela informando ao usuario que a opcao escolhida foi e invalida e pedindo para que ele tente novamnete 
+                    break;
+            }
+        } while (opcao != 0); //Loop vazio que ai repetir o Menu de Opcoes ate que se insira 0 para sair do programa 
+
+        numero.close(); //Indicando que nao vamos mais ler entradas do teclado e que podemos liberar os recursos associados
+    }
+}
