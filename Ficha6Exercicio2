@@ -1,0 +1,31 @@
+package Ficha6Exercicio2;
+
+//Importando a classe Scanner do pacote java.util 
+import java.util.Scanner;
+
+//Declarando uma classe publica GeradorRandom
+class GeradorRandom {
+	//Metodo para gerar um numero aleatorio 
+    public double generateRandomNumber() {
+        return Math.random(); //retorno do numero aleatorio gerado 
+    }
+
+    //Metodo para gerar numero aleatorio inteiro
+    public int generateRandomInteger(int bound) {
+        return (int) (Math.random() * bound);
+    }
+
+    //Declarando o metodo principal
+    public static void main(String[] args) {
+        Scanner lerDado = new Scanner(System.in);
+        GeradorRandom gerador = new GeradorRandom(); 
+
+        System.out.println("Digite um limite superior para o numero aleatorio inteiro:"); //Pedindo ao usuario oara inserir um limite superior para o numero aleatorio
+        int numeroSuperior = lerDado.nextInt();
+
+        //Impressao de mensagens
+        System.out.println("Numero aleatorio entre 0 e 1: " + gerador.generateRandomNumber()); //Impressao do numero aleatorio entre 0 e 1
+        System.out.println("Numero aleatorio inteiro entre 0 e " + numeroSuperior + ": " + gerador.generateRandomInteger(numeroSuperior + 1)); //Impressao do numero aleatorio inserido pelo usuario
+        lerDado.close();
+    }
+}
