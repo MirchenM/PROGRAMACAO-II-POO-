@@ -1,0 +1,41 @@
+package Exame2021_Exercicio4;
+
+//Importando a classe Scanner do pacote java.util 
+import java.util.Scanner;
+
+//Declaracao de uma classe publica 
+ class BuscaValorNoVector {
+	
+	//Declaracao do metodo principal 
+    public static void main(String[] args) {
+    	//Declaracao de um vector e instanciacao do mesmo com 25 posicoes
+        int[] vector = new int[25];
+
+        //Preenche o vetor com valores inseridos via teclado pelo usuario 
+        Scanner numero = new Scanner(System.in);
+        System.out.println("Insira os valores que farao parte do vector:"); //Mensagem na tela pedindo ao usuario para inserir valores no vector 
+        for (int i = 0; i < vector.length; i++) { //O loop inicia com i=0, vai executar o i repetidamente enquanto i < que o comprimento do vector e a cada iteracao, o i vai incrementar 1
+            System.out.print("Posicao " + i + ": "); //Mensagem na tela mostrando a posicao do valor dentro do vector 
+            vector[i] = numero.nextInt();  //Le um valor do tipo inteiro da entrada do usuario usando o objecto "scanner" e atribui esse mesmo valor ao elemento do vector "vector"
+        }
+        System.out.println();
+
+        //Lendo o valor N
+        System.out.print("Digite o valor a buscar dentro de vector: "); //Mensagem na tela pedindo ao usuario para inserir um valor a buscar dentro do vector 
+        int n = numero.nextInt(); //Quebra de linha
+        numero.close(); //Encerrando a instancia da classe Scanner
+
+        boolean valorEncontrado = false; //Declarando variavel "valorEncontrado" do tipo "boolean" com o valor innicial "false"
+        System.out.print("As posicoes encontradas foram: "); //Mensagem a tela mostrando as posicoes que foram encontradas 
+        for (int i = 0; i < vector.length; i++) { //O loop inicia com i=0, vai executar o i repetidamente enquanto i < que o comprimento do vector e a cada iteracao, o i vai incrementar 1
+            if (vector[i] == n) { //Testando se o valor do elemento do vetor "vector" no indice "i" e igual ao valor da variavel "n" 
+                System.out.print(i + " "); //Impressao do valor da variavel "i"
+                valorEncontrado = true; //Atribuindo o valor "true" a variavel "valorEncontrado"
+            }
+        }
+
+        if (!valorEncontrado) { //Condicao em que o valor nao seja encontrado 
+            System.out.println("O valor nao foi encontrado no vector!"); //Mensagem na tela dizendo que o valor nao foi encontrado no vector, ou seja, o valor inserido nao faz parte do vector
+        }
+    }
+}
