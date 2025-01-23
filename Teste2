@@ -1,0 +1,259 @@
+package Teste2;
+
+//Importando os pacotes a usar 
+import java.util.Date;
+import java.util.Vector;
+
+//Declaracao da classe publica Veiculo 
+public class Veiculo {
+	
+	//Declaracao de variaveis 
+    private String nomeCondutor;
+    private Date dataEntrada;
+    private String marca;
+    private String modelo;
+    private String matricula;
+    private String cor;
+
+    
+    //Metodo construtor da classe Veiculo com os parametros nomeCondutor, dataEntrada, marca, modelo, matricula e cor 
+    public Veiculo (String nomeCondutor, Date dataEntrada, String marca, String modelo, String matricula, String cor) {
+        this.nomeCondutor = nomeCondutor; //Atribuindo o valor do parametro nomeCondutor ao atributo nomeCondutor
+        this.dataEntrada = dataEntrada; //Atribuindo o valor do parametro dataEntrada ao atributo dataEntrada
+        this.marca = marca; //Atribuindo o valor do parametro marca ao atributo marca
+        this.modelo = modelo; //Atribuindo o valor do parametro modelo ao atributo modelo
+        this.matricula = matricula; //Atribuindo o valor do parametro matricula ao atributo matricula
+        this.cor = cor; //Atribuindo o valor do parametro cor ao atributo cor 
+        
+    }
+
+    
+    //Metodos Getters & Setters
+    public String getNomeCondutor() {
+        return nomeCondutor;
+    }
+
+    public Date getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    
+    //Metodo para mostrar detalhes do veiculo (nome do condutor, data de entrega, marca, modelo, matricula e a cor do veiculo
+    public void mostrarDetalhes() {
+        System.out.println("Nome do Condutor: " + nomeCondutor);
+        System.out.println("Data de Entrada: " + dataEntrada);
+        System.out.println("Marca: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Matricula: " + matricula);
+        System.out.println("Cor: " + cor);
+    }
+}
+
+
+
+//Declarando a classe OperacoesImplementacao que vai implementar a interface Operacoes
+class OperacoesImplementacao implements Operacoes {
+	
+	//Declaracao de variaveis 
+    private Vector<Veiculo> estacionamento;
+  
+  
+  //Metodo para criar o vector
+  public OperacoesImplementacao() {
+      estacionamento = new Vector<>(); //Criando um novo objecto "Vector" vazio e atribuindo esse objecto a variavel "estacionamento"
+  }
+  
+  //Metodo para inserir o veiculo
+  public void inserirVeiculo(String nomeCondutor, Date dataEntrada, String marca, String modelo, String matricula, String cor, int numeroDePortas) {
+      Veiculo veiculo;
+      if (numeroDePortas > 0) { //Testando o numero de portas do veiculo
+          veiculo = new Carro(nomeCondutor, dataEntrada, marca, modelo, matricula, cor, numeroDePortas); //Informando que o veiculo e um carro e apresenta informacoes sobre o nome do condutor, a data de entrega, a marca, o modelo, amatricula, a cor e o numero de portas do carro
+      } else {
+          veiculo = new Mota(nomeCondutor, dataEntrada, marca, modelo, matricula, cor); //Informando que o veiculo e uma mota e apresenta informacoes sobre o nome do condutor, a data de entrega, a marca, o modelo, a matricula e a cor da mota
+      }
+      
+      if (estacionamento.size() < 30) { //Testando se vagas no parque de estacionamento nao se encontram todas lotadas 
+          estacionamento.add(veiculo); //Estacionando um veiculo ao parque de estacionamento 
+          System.out.println("Veiculo estacionado com sucesso!"); //Mensagem de confirmacao dizendo que o veiculo foi estacionado com sucesso
+      } else {
+          System.out.println("Estacionamento lotado. Nao possivel estacionar mais veiculos!"); //Mensagem informando que o parque de estacionamento esta lotado e que nao e possivel estacionar mais veiculos
+      }
+  }
+  
+  
+  //Metodo para listar os veiculos 
+  public void listarVeiculos() {
+      if (estacionamento.isEmpty()) { //Testando se o parque de estacionamento esta vazio 
+          System.out.println("O parque de estacionamento esta vazio!"); //Mensagem informando que o parque de estacionamento esta vazio
+      } else {
+          System.out.println("Lista de veiculos no estacionamento:"); //Mensagem informando os carros que se encontram no parque de estacionamento 
+          for (Veiculo veiculo : estacionamento) {  //Para cada objecto "veiculo" do tipo "Veiculo" presente na coleco "estacionamento" 
+              veiculo.mostrarDetalhes(); //Mostrando os detalhes dos veiculos 
+          }
+      }
+  }
+  
+  
+  //Metodo para procurar veiculo  por matricula
+  public void procurarPorMatricula(String matricula) {
+      boolean encontrado = false; //Testando se a condicao e verdadeira 
+      for (Veiculo veiculo : estacionamento) { //Para cada objecto "veiculo" do tipo "Veiculo" presente na coleco "estacionamento" 
+          if (veiculo.getMatricula().equalsIgnoreCase(matricula)) { //Verifica se a matricula do veiculo e igual a matricula do veiculo especificado na variavel ignorando diferencas entre maiusculas e minusculas
+              veiculo.mostrarDetalhes(); //Mostrando os detalhes da procura por matricula
+              encontrado = true; //Atribuicao do valor logico "true" a variavel "encontrado"
+              break; //Saindo do loop
+          }
+      
+      if (!encontrado) { //Verifica se a variavel "encontrado" do tipo boolean e falsa 
+          System.out.println("Veiculo com a matricula " + matricula + " nao encontrado!"); //Mensagem informando que o veiculo com a matricula X nao foi encontrado
+      }
+      }
+  }
+  
+  
+  //Metodo para listar veiculos por marca
+  public void listarPorMarca(String marca) {
+      boolean encontrado = false; //Declara a variavel "encontrado" do tipo "booleano" e inicializa com o valor falso
+      for (Veiculo veiculo : estacionamento) { //Para cada objecto "veiculo" do tipo "Veiculo" presente na coleco "estacionamento" 
+          if (veiculo.getMarca().equalsIgnoreCase(marca)) { //Verifica se a marca do veiculo e igual a marca do veiculo especificado na variavel ignorando diferencas entre maiusculas e minusculas
+              veiculo.mostrarDetalhes(); //Mostrando os detalhes 
+              encontrado = true; //Atribuicao do valor logico "true" a variavel "encontrado"
+          }
+      }
+      if (!encontrado) { //Verifica se a variavel "encontrado" do tipo boolean e falsa 
+          System.out.println("Nao ha veiculos da marca " + marca + " no parque de estacionamento!"); //Mensagem informando que nao ha veiculos da marca X no parque de estacionamento 
+      }
+  }
+  
+  
+  //Metodo para listar veiculos que se encontram estacionados por mais de 24h
+  public void listarVeiculosAcimaDe24Horas() {
+      Date agora = new Date(); //Declaracao da variavel "agora" do tipo "Date" e inicializada com um objecto que representa o momento atual
+      long vinteQuatroHoras = 24 * 60 * 60 * 1000; // 24h em milissegundos
+      boolean encontrado = false; //Declara a variavel "encontrado" do tipo "booleano" e inicializa com o valor falso
+      for (Veiculo veiculo : estacionamento) { //Para cada objecto "veiculo" do tipo "Veiculo" presente na colecao estacionamento 
+          long tempoEstacionado = agora.getTime() - veiculo.getDataEntrada().getTime();
+          if (tempoEstacionado > vinteQuatroHoras) { //Testando se o tempo que o veiculo esta estacionado superou 24h
+              veiculo.mostrarDetalhes(); //Mostrando os detalhes dos veiculos que se encontram estacionados por um periodo superior a 24h
+              encontrado = true; //Atribuicao do valor logico "true" a variavel "encontrado"
+          }
+      }
+      if (!encontrado) { //Verifica se a variavel "encontrado" do tipo boolean e falsa 
+          System.out.println("Nao ha veiculos estacionados por mais de 24h!"); //Mensagem informando que nao ha veiculos que estacionados a mais de 24h
+      }
+  }
+}
+
+
+
+/Interface com todas operacoes possiveis da empresa de estacionamento 
+interface Operacoes {
+	//Atributos
+  void inserirVeiculo(String nomeCondutor, Date dataEntrada, String marca, String modelo, String matricula, String cor, int numeroDePortas);
+  void listarVeiculos();
+  void procurarPorMatricula(String matricula);
+  void listarPorMarca(String marca);
+  void listarVeiculosAcimaDe24Horas();
+  
+}
+
+
+
+//Declaracao de uma classe filha publica Mota
+class Mota extends Veiculo {
+	
+	//Metodo para verificar as informacoes sobre a mota 
+    public Mota(String nomeCondutor, Date dataEntrada, String marca, String modelo, String matricula, String cor) {
+        super(nomeCondutor, dataEntrada, marca, modelo, matricula, cor);
+    }
+    
+    //Metodo construtor para mostrar detalhes referentes a mota
+    @Override
+    public void mostrarDetalhes() {
+        super.mostrarDetalhes();
+        System.out.println("Tipo: Mota");
+        System.out.println();
+    }
+}
+
+
+
+//Declaracao de uma classe filha publica Carro
+class Carro extends Veiculo {
+	
+	//Declaracao de variaveis 
+    private int numeroDePortas;
+
+    
+    //Metodo para verrificar as informacoes sobre o carro
+    public Carro(String nomeCondutor, Date dataEntrada, String marca, String modelo, String matricula, String cor, int numeroDePortas) {
+        super(nomeCondutor, dataEntrada, marca, modelo, matricula, cor);
+        this.numeroDePortas = numeroDePortas;
+    }
+
+    
+    //Metodo para determinar o numero de portas do carro
+    public int getNumeroDePortas() {
+        return numeroDePortas;
+    }
+
+    //Metodo construtor para mostrar detalhes referentes ao carro
+    @Override
+    public void mostrarDetalhes() {
+        super.mostrarDetalhes();
+        System.out.println("Numero de Portas: " + numeroDePortas);
+        System.out.println("Tipo: Carro");
+    }
+}
+
+
+
+//Declaracao de uma classe publica Arranca
+class Arranca {
+	
+	//Metodo principal para preencher o vector 
+	public static void main(String[] args) {
+		OperacoesImplementacao operacoes = new OperacoesImplementacao();
+    
+		//Preencher o estacionamento com carros e motas
+		operacoes.inserirVeiculo("Mirchen", new Date(), "Marca1", "Modelo1", "111", "Branco", 4);
+		operacoes.inserirVeiculo("Condutor2", new Date(), "Marca2", "Modelo2", "222", "Preto", 2);
+		operacoes.inserirVeiculo("Condutor3", new Date(), "Marca1", "Modelo3", "333", "Azul ciano", 4);
+		operacoes.inserirVeiculo("Condutor4", new Date(), "Marca3", "Modelo4", "444", "Azul fosco", 2);
+		operacoes.inserirVeiculo("Condutor5", new Date(), "Marca2", "Modelo5", "555", "Presto fosco", 4);
+		operacoes.inserirVeiculo("Condutor6", new Date(), "Marca1", "Modelo6", "666", "Preto", 2);
+		operacoes.inserirVeiculo("Condutor7", new Date(), "Marca3", "Modelo7", "777", "Branco", 4);
+		operacoes.inserirVeiculo("Condutor8", new Date(), "Marca2", "Modelo8", "888", "Cinza", 2);
+		operacoes.inserirVeiculo("Condutor9", new Date(), "Marca1", "Modelo9", "999", "Preto", 4);
+		operacoes.inserirVeiculo("Mirchen", new Date(), "Marca3", "Modelo10", "101010", "Cinza", 2);
+
+		//Listar todos os veiculos no estacionamento
+		operacoes.listarVeiculos();
+
+		//Procurar um veiculo pela matricula
+		operacoes.procurarPorMatricula("555");
+
+		//Listar veiculos de uma determinada marca
+		operacoes.listarPorMarca("Marca1");
+
+		//Listar veiculos estacionados por mais de 24h
+		operacoes.listarVeiculosAcimaDe24Horas();
+	}
+	
+}
