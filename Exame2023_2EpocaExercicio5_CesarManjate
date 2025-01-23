@@ -1,0 +1,197 @@
+package Exame2023_2EpocaExercicio5_CesarManjate;
+
+import java.util.Date;
+import java.util.Scanner;
+import java.util.Vector;
+
+	//Declarando uma interface publica Prova
+	public interface Prova {
+		//Atributos
+		int getPontuacao();
+		Date getDataEvento();
+		int getNumElementos();
+		void setPontuacao(int p);
+		boolean equals(Object obj);
+		String toString();
+	}
+
+
+//Declarando uma classe publica Rali que implementa a interface Prova 
+class Rali implements Prova {
+	
+	//Atributos
+    private String nomeEquipe;
+    private Date dataEvento;
+    private int numElementos;
+    private int tempoProva;
+    private String marcaAutomovel;
+    private String nomePiloto;
+    private String nomeCopiloto;
+
+    //Metodo construtor da classe publica Rali com os parametros nomeEquipe, dataEvento, numElementos, tempoProva, marcaAutomovel, nomePiloto e nomeCopiloto
+    public Rali(String nomeEquipe, Date dataEvento, int numElementos, int tempoProva, String marcaAutomovel, String nomePiloto, String nomeCopiloto) {
+        this.nomeEquipe = nomeEquipe; //Atribui o valor fornecido como parametro "nomeEquipe" ao atributo "nomeEquipe
+        this.dataEvento = dataEvento; //Atribui o valor fornecido como parametro "dataEvento" ao atributo "dataEvento"
+        this.numElementos = numElementos; //Atribui o valor fornecido como parametro "numElementos" ao atributo "numElementos"
+        this.tempoProva = tempoProva; //Atribui o valor fornecido como parametro "tempoProva" ao atributo "tempoProva"
+        this.marcaAutomovel = marcaAutomovel; //Atribui o valor fornecido como parametro "marcaAutomovel" ao atributo "marcaAutomovel"
+        this.nomePiloto = nomePiloto; //Atribui o valor fornecido como parametro "nomePiloto" ao atributo "nomePiloto"
+        this.nomeCopiloto = nomeCopiloto; //Atribui o valor fornecido como parametro "nomeCopiloto" ao atributo "nomeCopiloto"
+    }
+    //Metodos Getters & Setters
+    public int getPontuacao() {
+        return 0;
+    }
+
+    public Date getDataEvento() {
+        return dataEvento;
+    }
+
+    public int getNumElementos() {
+        return numElementos;
+    }
+
+    public void setPontuacao(int p) {
+      
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Rali outra = (Rali) obj;
+        return nomeEquipe.equals(outra.nomeEquipe);
+    }
+    //Classe publica do metodo toString
+    public String toString() {
+        return "Rali [nomeEquipe = " + nomeEquipe + ", dataEvento = " + dataEvento + ", numElementos = " + numElementos
+                + ", tempoProva = " + tempoProva + ", marcaAutomovel = " + marcaAutomovel + ", nomePiloto = " + nomePiloto
+                + ", nomeCopiloto = " + nomeCopiloto + "]"; //Retorno do nome da equipe, da data do evento, do numero de elementos,
+         												  //do tempo da prova, da marca do automovel, dos nomes do piloto e co-piloto
+    }
+    
+}
+
+
+//Declarando a classe publica Futebol que implementa a interface Prova 
+class Futebol implements Prova {
+		//Atributos 
+		private String nomeEquipe;
+		private Date dataEvento;
+		private int numElementos;
+		private char resultado;
+		private int pontuacao;
+
+		//Metodo construtor da classe publica Futebol com os parametros nomeEquipe, dataEvento, numElementos, resultado e pontuacao
+		public Futebol(String nomeEquipe, Date dataEvento, int numElementos, char resultado, int pontuacao) {
+			this.nomeEquipe = nomeEquipe; //Atribui o valor fornecido como parametro "nomeEquipe" ao atributo "nomeEquipe"
+			this.dataEvento = dataEvento; //Atribui o valor fornecido como parametro "dataEvento" ao atributo "dataEvento"
+			this.numElementos = numElementos; //Atribui o valor fornecido como parametro "numElementos" ao atributo "numElementos"
+			this.resultado = resultado; //Atribui o valor fornecido como parametro "resultado" ao atributo "resultado"
+			this.pontuacao = pontuacao; //Atribui o valor fornecido como parametro "pontuacao" ao atributo "pontuacao"
+		}
+
+		//Metodos Getters & Setters 
+		public int getPontuacao() {
+			return pontuacao;
+		}
+    
+		public Date getDataEvento() {
+			return dataEvento;
+		}
+
+		public int getNumElementos() {
+			return numElementos;
+		}
+
+		public void setPontuacao(int p) {
+			pontuacao = p;
+		}
+
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null || getClass() != obj.getClass()) {
+				return false;
+			}
+			Futebol outra = (Futebol) obj;
+				return nomeEquipe.equals(outra.nomeEquipe);
+		}
+
+    //Metodo publico da classe toString
+    public String toString() {
+        return "Futebol [nomeEquipe = " + nomeEquipe + ", dataEvento = " + dataEvento + ", numElementos = " + numElementos
+                + ", resultado = " + resultado + ", pontuacao = " + pontuacao + "]"; //Retorno do nome da equipe, data do evento, numero de elementos,
+        																		   //resultado e pontuacao 
+    }
+}
+
+
+class Teste {
+    public static void main(String[] args) {
+        Scanner lerDado = new Scanner(System.in);
+        Vector<Prova> provas = new Vector<>();
+
+        for (int i = 0; i < 2; i++) {
+            System.out.println("Digite os detalhes da equipe de Futebol " + (i + 1) + ":"); //Pedindo os detalhes da equipe de Futebol
+            System.out.print("Nome da equipe: "); //Pedindo ao usuario o nome da equipe de Futebol 
+            String nomeEquipe = lerDado.nextLine(); //Leitura do nome da equipe 
+            System.out.print("Data do evento (dd/mm/aaaa): "); //Pedindo ao usuario a data do evento 
+            String dataEventoStr = lerDado.nextLine(); //Leitura da data do evento 
+            System.out.print("Numero de elementos na equipe: "); //Pedindo ao usuario o numero de elementos da equipe 
+            int numElementos = lerDado.nextInt(); //Leitura do numero de elementos da equipe 
+            lerDado.nextLine(); //Quebra de linha
+            System.out.print("Resultado (g-ganhou, e-empatou, p-perdeu): "); //Pedindo ao usuario o resultado do jogo (G-Ganhou, E-Empate, P-Perdeu)
+            char resultado = lerDado.nextLine().charAt(0);
+            System.out.print("Pontuacao: "); //Pedindo ao usuario a pontuacao do jogo
+            int pontuacao = lerDado.nextInt(); //Leitura da pontuacao do jogo 
+            lerDado.nextLine(); //Quebra de linha
+
+            Date dataEvento = parseDate(dataEventoStr); 
+            Futebol equipeFutebol = new Futebol(nomeEquipe, dataEvento, numElementos, resultado, pontuacao);
+            provas.add(equipeFutebol);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            System.out.println("Digite os detalhes da equipe de Rali " + (i + 1) + ":"); //Pedindo os detalhes da equipe de Rali
+            System.out.print("Nome da equipe: "); //Pedindo ao usuario o nome da equipe de Rali
+            String nomeEquipe = lerDado.nextLine(); //Leitura do nome da equipe
+            System.out.print("Data do evento (dd/mm/aaaa): "); //Pedindo ao usuario a data do evento 
+            String dataEventoStr = lerDado.nextLine(); //Quebra de linha
+            System.out.print("Numero de elementos na equipe: "); //Pedindo ao usaurio o numero de elementos da equipe 
+            int numElementos = lerDado.nextInt(); //Leitura do numero de elementos da equipe 
+            lerDado.nextLine(); //Quebra de linha
+            System.out.print("Tempo conseguido na prova: "); //Pedindo ao usuario o tempo conseguido na prova 
+            int tempoProva = lerDado.nextInt();
+            lerDado.nextLine(); //Quebra de linha 
+            System.out.print("Marca do automovel: "); //Pedindo ao usuario a marca do automovel 
+            String marcaAutomovel = lerDado.nextLine(); //Leitura da marca do automovel 
+            System.out.print("Nome do piloto: "); //Pedindo ao usuario o nome do piloto
+            String nomePiloto = lerDado.nextLine(); //Leitura do nome do piloto
+            System.out.print("Nome do co-piloto: "); //Pedindo ao usuario o nome do co-piloto 
+            String nomeCopiloto = lerDado.nextLine(); //Leitura do nome do co-piloto
+
+            Date dataEvento = parseDate(dataEventoStr); 
+
+            Rali equipeRali = new Rali(nomeEquipe, dataEvento, numElementos, tempoProva, marcaAutomovel, nomePiloto, nomeCopiloto);
+            provas.add(equipeRali);
+        }
+
+        System.out.println("Equipes adicionadas:"); //Equipes adicionais 
+        for (Prova prova : provas) {
+            System.out.println(prova); //Impressao na tela das equipes adicionais 
+        }
+
+        lerDado.close(); //Encerrando a recepcao de valores inseridos via teclado 
+    }
+
+    
+    private static Date parseDate(String dateStr) {
+       
+        return new Date(); //Retorno da data 
+    }
+}
