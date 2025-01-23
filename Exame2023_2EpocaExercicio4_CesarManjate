@@ -1,0 +1,186 @@
+package Exame2023_2EpocaExercicio4_CesarManjate;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+//Declarando a classe abstracta membro
+abstract class Membro {
+	//Atributos 
+    private int id;
+    private String nome;
+    private double mensalidadeBase = 2000.00;
+
+    //Metodo construtor publico da classe Membro com os parametros id, nome 
+    public Membro(int id, String nome) {
+        this.id = id; //Atribui o valor fornecido como parametro "id" ao parametro "id"
+        this.nome = nome; //Atribui o valor fornecido como parametro "nome" ao parametro "nome"
+    }
+
+    //Classe abstracta calcularMensalidade
+    public abstract double calculaMensalidade();
+
+    //Metodos Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getMensalidadeBase() {
+        return mensalidadeBase;
+    }
+    
+}
+
+
+//Declarando a classe publica MembroAulas que herda os atributos da classe membro 
+ class MembroAulas extends Membro {
+	//Atributos 
+    private List<String> aulas;
+
+    //Metodo construtor com os parametros id, nome, aulas
+    public MembroAulas(int id, String nome, List<String> aulas) {
+        super(id, nome);
+        this.aulas = aulas; //Atribui o valor fornecido como parametro "aulas" ao atributo aulas 
+    }
+    //Metodo Get
+    public List<String> getAulas() {
+        return aulas;
+    }
+   //Classe publica calcularMensalidade
+    public double calculaMensalidade() {
+        double mensalidade = getMensalidadeBase(); //Recebendo o valor da mensalidade base 
+        mensalidade += (mensalidade * 5 * aulas.size())/100; //Calculando o valor da mensalidade 
+        return mensalidade; //Retorno do valor calculado da mensalidade 
+    }
+    
+}
+
+
+//Declarando a classe publica MembroLivreTransito que herda os atributos da classe Membro
+class MembroLivreTransito extends Membro {
+	//Atributos 
+	private boolean lugarEstacionamento;
+
+		//Metodo construtor da classe MembroLivreTransito com os parametros id, nome, lugarEstacionamento
+	    public MembroLivreTransito(int id, String nome, boolean lugarEstacionamento) {
+	        super(id, nome);
+	        this.lugarEstacionamento = lugarEstacionamento; //Atribui o valor fornecido como parametro "lugarEstacionamento" ao atributo "lugarEstacionamento"
+	    }
+	    //Metodo get
+	    public boolean temLugarEstacionamento() {
+	        return lugarEstacionamento;
+	    }
+	    //Classe publica calculaMensalidade
+	    public double calculaMensalidade() {
+	        double mensalidade = getMensalidadeBase(); //Recebendo o valor da mensalidade base 
+	        if (temLugarEstacionamento()) { //Testando se tem ou nao lugar no estacionamento 
+	            mensalidade += (mensalidade * 30)/100; //Efectuando o calculo da mensalidade do MembroLivreTransito
+	        }
+	        return mensalidade; //Retorno do valor calculado da mensalidade do MembroLivreTransito 
+	    }
+	    
+	}
+
+
+//Declarando a classe publica MembroPiscina que herda os atributos da classe Membro
+class MembroPiscina extends Membro {
+	//Atributos 
+    private boolean temToalhaIncluida;
+
+    //Metodo construtor MembroPiscina com os atributos id, nome, temToalhaIncluida
+    public MembroPiscina(int id, String nome, boolean temToalhaIncluida) {
+        super(id, nome);
+        this.temToalhaIncluida = temToalhaIncluida; //Atribui o valor fornecido como parametro "temToalhaIncluida" ao atributo "temToalhaIncludia"
+    }
+    //Metodo Get
+    public boolean temToalhaIncluida() {
+        return temToalhaIncluida;
+    }
+    //Classe publica calculaMensalidade
+    public double calculaMensalidade() {
+        double mensalidade = getMensalidadeBase(); //Recebendo o valor da mensalidade base 
+        if (temToalhaIncluida()) { //Testando se a toalha esta ou nao incluida 
+            mensalidade += (mensalidade * 10)/100; //Efectuando o calculo da mensalidade para o MembroPiscina
+        }
+        return mensalidade; //Retorno do valor calculado da mensalidade do MembroPiscina
+    }
+    
+}
+
+
+//Declarando o metoto publico Main
+class Main {
+	//Declaracao da classe principal
+    public static void main(String[] args) {
+        Scanner lerValor = new Scanner(System.in); //Declarando a classe Scanner que vai receber valores via teclado
+        //Criaccao de membros 
+        MembroLivreTransito membro1 = criarMembroLivreTransito(lerValor); //Criando MembroLivreTransito
+        MembroPiscina membro2 = criarMembroPiscina(lerValor); //Criando MembroPiscina
+        MembroAulas membro3 = criarMembroAulas(lerValor); //Criando MembroAulas
+       
+        List<Membro> membros = new ArrayList<>();
+        membros.add(membro1);
+        membros.add(membro2);
+        membros.add(membro3);
+        
+        for (Membro membro : membros) {
+            System.out.println("ID: " + membro.getId()); //Recebendo via teclado o ID do membro
+            System.out.println("Nome: " + membro.getNome()); //Recebendo via teclado o Nome do membro
+            System.out.println("Mensalidade: " + membro.calculaMensalidade() + " MZN"); //Recebendo via teclado a Mensalidade do membro
+            System.out.println();
+        }
+        lerValor.close(); //Encerrando a recepcao de valores inseridos via teclado
+    }
+    
+    //Criando MembroLivreTransito
+    private static MembroLivreTransito criarMembroLivreTransito(Scanner lerValor) {
+        System.out.println("Criando Membro Livre Transito");
+        System.out.print("ID: "); //Pedindo o ID do MembroLivreTransito
+        int id = lerValor.nextInt();
+        lerValor.nextLine(); //Quebra de linha 
+        System.out.print("NOME: "); //Pedindo o nome do MembroLivreTransito
+        String nome = lerValor.nextLine(); 
+        System.out.print("Possui lugar de estacionamento? (S/N): "); //Perguntando se o MembroLivreTransito possui lugar no estacionamento 
+        String resposta = lerValor.nextLine(); //Quebra de linha 
+        boolean lugarEstacionamento = resposta.equalsIgnoreCase("S"); 
+        return new MembroLivreTransito(id, nome, lugarEstacionamento); //Retorno do novo MembroLivreTransito
+    }  
+    
+    //Criando MembroPiscina
+    private static MembroPiscina criarMembroPiscina(Scanner lerValor) {
+        System.out.println("Criando Membro Piscina");
+        System.out.print("ID: "); //Pedindo o ID do MembroPiscina
+        int id = lerValor.nextInt();
+        lerValor.nextLine(); //Quebra de linha 
+        System.out.print("NOME: "); //Pedindo o nome do MembroPiscina
+        String nome = lerValor.nextLine();
+        System.out.print("Possui toalha incluida? (S/N): "); //Perguntando se o MembroPiscina possui toalha incluida
+        String resposta = lerValor.nextLine(); //Quebra de linha
+        boolean temToalhaIncluida = resposta.equalsIgnoreCase("S");
+        return new MembroPiscina(id, nome, temToalhaIncluida); //Retorno do novo MembroPiscina
+    }
+    
+    //Criando MembroAulas
+    private static MembroAulas criarMembroAulas(Scanner lerValor) {
+        System.out.println("Criando Membro Aulas");
+        System.out.print("ID: "); //Pedindo o ID do MembroAulas
+        int id = lerValor.nextInt();
+        lerValor.nextLine(); //Quebra de linha 
+        System.out.print("NOME: "); //Pedindo o nome do MembroAulas
+        String nome = lerValor.nextLine();
+        System.out.print("Quantidade de aulas: "); //Pedindo a quantidade de aulas do MembroAulas
+        int quantidadeAulas = lerValor.nextInt();
+        lerValor.nextLine(); //Quebra de linha 
+        List<String> aulas = new ArrayList<>();
+        for (int i = 0; i < quantidadeAulas; i++) {
+            System.out.print("Nome da aula " + (i + 1) + ": "); //Pedindo ao usuario para inserir o nome da aula 
+            String nomeAula = lerValor.nextLine();
+            aulas.add(nomeAula);
+        }
+        return new MembroAulas(id, nome, aulas); //Retorno do novo MembroAulas
+    }
+}
